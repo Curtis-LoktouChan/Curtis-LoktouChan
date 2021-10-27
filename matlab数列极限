@@ -1,5 +1,6 @@
 //实验4作业第一题
-
+//浮点数值，去数列Xn-对应极限的绝对值n=1～20
+//说明：奇数下标的是
 delete n:
 x:=通项公式:
 plot（plot::Sequence(x,n=1..20), #O, AxesTitle=["n","x"]);
