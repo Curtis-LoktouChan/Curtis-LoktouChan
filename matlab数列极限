@@ -1,0 +1,7 @@
+//实验4作业第一题
+
+delete n:
+x:=通项公式:
+plot（plot::Sequence(x,n=1..20), #O, AxesTitle=["n","x"]);
+a:=limit(x,n=infinity);
+matrix(20,3,[[n,float(x),float(abs(x-a))] dollar n=1..20]);
