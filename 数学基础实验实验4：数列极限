@@ -2,15 +2,16 @@
 //浮点数值，去数列Xn-对应极限的绝对值n=1～20
 //说明：奇数下标的是
 delete n:
-x:=通项公式:
-plot（plot::Sequence(x,n=1..20), #O, AxesTitle=["n","x"]);
+x:=1/n*cos(PI*n/2):
+plot(plot::Sequence(x,n=1..20), #O, AxesTitles=["n","x"]);
 a:=limit(x,n=infinity);
 matrix(20,3,[[n,float(x),float(abs(x-a))] $ n=1..20]);
+
 
 
 //实验4第八题
 delete n:
 x:=sum(1/k, k=1..n)/n:
-plot（plot::Sequence(x,n=1..20), #O, AxesTitle=["n","x"]);
+plot（plot::Sequence(x,n=1..20), #O, AxesTitles=["n","x"]);
 a:=limit(x,n=infinity);
 matrix(20,3,[[n,float(x),float(abs(x-a))] $ n=1..20]);
