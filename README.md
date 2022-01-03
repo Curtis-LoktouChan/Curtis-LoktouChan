@@ -3,7 +3,7 @@
 - 🌱 I’m currently learning in SCNU Institute of IOE
 - 💞️ I’m looking to collaborate on Wed,Instagram，Facebook
 - 📫 How to reach me comeonloktou@outlook.com/comeongz13002055898@gmail.com
-- You can Follow My Instagram:@loktou_chan
+- You can Follow My Instagram:@loktou_chan    https://www.instagram.com/loktou_chan
 
 
 <!---
