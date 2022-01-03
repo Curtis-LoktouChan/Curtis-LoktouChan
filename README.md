@@ -4,6 +4,7 @@
 - 💞️ I’m looking to collaborate on Wed,Instagram，Facebook
 - 📫 How to reach me comeonloktou@outlook.com/comeongz13002055898@gmail.com
 - You can Follow My Instagram:@loktou_chan    https://www.instagram.com/loktou_chan
+- You can Follow My Youtube Channel:https://www.youtube.com/channel/UC7JIGFLJ9m4dgLGCDPgOdyg
 
 
 <!---
