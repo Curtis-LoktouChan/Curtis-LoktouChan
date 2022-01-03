@@ -1,9 +1,9 @@
 - 👋 Hi, I’m @Curtis-LoktouChan
-- 👀 I’m interested in Imformation Engineering
+- 👀 I’m majoring in Imformation Engineering（AKA,信息工程)
 - 🌱 I’m currently learning in SCNU Institute of IOE
-- 💞️ I’m looking to collaborate on Wed
+- 💞️ I’m looking to collaborate on Wed,Instagram，Facebook
 - 📫 How to reach me comeonloktou@outlook.com/comeongz13002055898@gmail.com
-instagram:@loktou_chan
+You can Follow My Instagram:@loktou_chan
 
 
 <!---
