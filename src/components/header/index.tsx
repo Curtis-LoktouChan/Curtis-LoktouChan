@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react'
 import { history } from 'umi'
 import { Image, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'dva'
 import { ACTIONS } from '@/models'
 
@@ -65,45 +66,48 @@ const Header: FC = (props) => {
 
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.first}>
-        <Image src={logo} width={150} preview={false} />
-      </div>
-      <div className={styles.second}>
-        <Button type="link" onClick={() => history.push('./aboutUs')}>
-          关于我们
-        </Button>
-        <Button type="link" onClick={() => history.push('./hardware')}>
-          硬件系统
-        </Button>
-        <Button type="link" onClick={() => history.push('./course')}>
-          教学案例
-        </Button>
-        <Button type="link" onClick={() => history.push('./softDownload')}>
-          下载软件
-        </Button>
-        <Button type="link" onClick={() => history.push('./userCenter')}>
-          个人中心
-        </Button>
-      </div>
-      <div className={styles.third}>
-        <Dropdown
-          className={styles.dropdown}
-          overlay={user?.isLogin ? loggedInMenu : loginMenu}
-          placement="bottomLeft"
-          arrow
-          trigger={['hover']}
-        >
-          <div className={styles.userContainer}>
-            <span className={styles.username}>
-              {user?.isLogin ? user?.userInfo?.username : '未登录'}
-            </span>
-            <Avatar
-              shape="circle"
-              size="small"
-              src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
-            />
-          </div>
-        </Dropdown>
+      <div className={styles.headerInner}>
+        <div className={styles.first}>
+          <Image src={logo} width={150} preview={false} />
+        </div>
+        <div className={styles.second}>
+          <Button type="link" onClick={() => history.push('./aboutUs')}>
+            关于我们
+          </Button>
+          <Button type="link" onClick={() => history.push('./hardware')}>
+            硬件系统
+          </Button>
+          <Button type="link" onClick={() => history.push('./course')}>
+            教学案例
+          </Button>
+          <Button type="link" onClick={() => history.push('./softDownload')}>
+            下载软件
+          </Button>
+          <Button type="link" onClick={() => history.push('./userCenter')}>
+            个人中心
+          </Button>
+        </div>
+        <div className={styles.third}>
+          <Dropdown
+            className={styles.dropdown}
+            overlay={user?.isLogin ? loggedInMenu : loginMenu}
+            placement="bottomLeft"
+            arrow
+            trigger={['hover']}
+          >
+            <div className={styles.userContainer}>
+              <span className={styles.username}>
+                {user?.isLogin ? user?.userInfo?.username : '未登录'}
+              </span>
+              <Avatar
+                shape="circle"
+                size="small"
+                src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
+                icon={<UserOutlined />}
+              />
+            </div>
+          </Dropdown>
+        </div>
       </div>
     </div>
   )
