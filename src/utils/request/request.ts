@@ -9,9 +9,15 @@ const errorType = {
   netWorkError: 2222
 }
 
-const errorHandler = (error: ResponseError): Promise<Response> => {
+interface IErrorData {
+  code: number
+  msg: string
+  data?: any
+}
+
+const errorHandler = (error: ResponseError<IErrorData>): Promise<Response> => {
   console.log(error)
-  if (!error.response) {
+  if (!error.data) {
     notification.error({
       message: '系统或网络错误，请检查后重试',
       duration: 3
@@ -44,8 +50,8 @@ const errorHandler = (error: ResponseError): Promise<Response> => {
     maxCount: 3
   })
   notification.error({
-    message: error.response?.statusText,
-    description: error.response?.text,
+    message: error.data?.code,
+    description: error.data?.msg,
     duration: 3
   })
 
@@ -91,7 +97,7 @@ request.interceptors.response.use(async (response) => {
     return res?.data || res
   }
 
-  return response
+  return Promise.reject({ ...res, data: res })
 })
 
 export default request
