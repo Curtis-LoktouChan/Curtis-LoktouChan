@@ -61,7 +61,11 @@ const userModel: IUserModel = {
       const res: IBaseResp = yield call(() => UserService.logout())
       if (res.code === 200) {
         callback && callback(res)
-        localStorage.clear()
+        localStorage.setItem('login_token', '')
+        yield put({
+          type: 'logout',
+          payload: res
+        })
       }
     }
   },
@@ -71,9 +75,9 @@ const userModel: IUserModel = {
         ...state,
         isLogin: true,
         userInfo: {
-          username: action?.payload?.username,
+          username: action?.payload?.userInfo?.username,
           login_token: action?.payload?.login_token,
-          avatarSrc: action?.payload?.avatarSrc || BASE_AVATAR_SRC
+          avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC
         }
       }
     },

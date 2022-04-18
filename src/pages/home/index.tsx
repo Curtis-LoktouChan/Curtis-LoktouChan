@@ -17,15 +17,13 @@ import SoftDownload from '@/components/home/softDownload'
 const Home: FC = () => {
   // ahooks 的 useRequest 举例
   const { data, run } = useRequest(HomeService.testApi, {
-    defaultParams: [{ mode: 'test' }],
-    manual: true,
-    onSuccess: (res) => {
-      console.log('成功', res)
-      return res
-    },
-    onError: (reason) => {
-      console.log('失败', reason)
-    }
+    defaultParams: [{ mode: 'test' }]
+    // onSuccess: (res) => {
+    //   console.log('成功', res)
+    // },
+    // onError: (reason) => {
+    //   console.log('失败', reason)
+    // }
   })
 
   return (

@@ -4,6 +4,6 @@ import { ITestRequest, ITestResponse } from './types'
 export default {
   testApi: apiHandle<ITestRequest, ITestResponse>({
     method: 'GET',
-    url: 'end'
+    url: 'getWork'
   })
 }
