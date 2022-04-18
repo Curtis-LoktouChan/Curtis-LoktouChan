@@ -7,25 +7,14 @@ import HomeService from '@/services/home'
 import { useRequest } from 'ahooks'
 
 import Header from '@/components/header'
-import MyCarousel from '@/components/home/myCarousel'
-import Introduction from '@/components/home/introduction'
-import Hardware from '@/components/home/hardware'
-import Course from '@/components/home/course'
-import Work from '@/components/home/work'
-import SoftDownload from '@/components/home/softDownload'
+import MyCarousel from './components/myCarousel'
+import Introduction from './components/introduction'
+import Hardware from './components/hardware'
+import Course from './components/course'
+import Work from './components/work'
+import SoftDownload from './components/softDownload'
 
 const Home: FC = () => {
-  // ahooks 的 useRequest 举例
-  const { data, run } = useRequest(HomeService.testApi, {
-    defaultParams: [{ mode: 'test' }]
-    // onSuccess: (res) => {
-    //   console.log('成功', res)
-    // },
-    // onError: (reason) => {
-    //   console.log('失败', reason)
-    // }
-  })
-
   return (
     <ConfigProvider locale={zhCN}>
       <Layout>

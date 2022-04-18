@@ -1,7 +1,10 @@
-interface IWorkObjectType {
-  work: string
-  name: string
-  id: string
+interface IWorkListItem {
+  id: number
+  CreatedAt: string
+  UpdatedAt: string
+  projectName: string
 }
 
-export type IWorkResponse = Array<IWorkObjectType>
+export interface IWorkListResponse {
+  workList: IWorkListItem[]
+}

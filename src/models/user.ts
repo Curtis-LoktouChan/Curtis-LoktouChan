@@ -49,6 +49,7 @@ const userModel: IUserModel = {
     // token 登录
     *loginWithTokenEffect({ payload, callback }, { call, put }) {
       const res: IUserLoginResponse = yield call(() => UserService.loginWithToken())
+      console.log(res)
       if (res) {
         callback && callback(res)
         yield put({
@@ -71,6 +72,7 @@ const userModel: IUserModel = {
   },
   reducers: {
     login(state, action) {
+      console.log('login', action)
       return {
         ...state,
         isLogin: true,
@@ -81,7 +83,8 @@ const userModel: IUserModel = {
         }
       }
     },
-    logout(state) {
+    logout(state, action) {
+      console.log('logout', action)
       return {
         ...state,
         isLogin: false,

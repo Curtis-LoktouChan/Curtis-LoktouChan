@@ -1,57 +1,40 @@
 import { history } from 'umi'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { Upload, Button, Card } from 'antd'
 import { UploadOutlined, FileTextTwoTone, LockOutlined } from '@ant-design/icons'
-
-import { useDispatch, useSelector } from 'dva'
-import { ACTIONS } from '@/models'
+import { useRequest } from 'ahooks'
+import { useSelector } from 'dva'
 
 import styles from './index.less'
 import work from '@/assets/works/work.png'
+import WorkServices from '@/services/work'
 
 const { Meta } = Card
 
-interface WorkObj {
-  name: string
-  work: string
-  id: string
-}
-
 const Work: FC = () => {
-  const works = useSelector((state: any) => state.works) // 用户作品
   const user = useSelector((state: any) => state.user) // 用户信息
-  const dispatch = useDispatch()
 
-  // 组件完成挂载时触发
-  useEffect(() => {
-    user?.isLogin &&
-      dispatch({
-        type: ACTIONS.works.getWork
-      })
-  }, [])
-
-  // user状态更新时触发
-  useEffect(() => {
-    user?.isLogin &&
-      dispatch({
-        type: ACTIONS.works.getWork
-      })
-  }, [user])
+  const { data: works } = useRequest(WorkServices.getWorks, {
+    onSuccess: (res) => {
+      console.log(res)
+      return res
+    }
+  })
 
   const whetherToRender = () => {
     return user?.isLogin ? (
       // 登录时内容区
       <div>
         <div className={styles.workContext}>
-          {works.works.map((workObj: WorkObj) => {
+          {works?.workList?.map((item) => {
             return (
               <Card
+                key={item.id}
                 className={styles.workCard}
                 hoverable
                 cover={<img src={work} alt="我的作品" />}
-                key={workObj.id}
               >
-                <Meta title={workObj.name} />
+                <Meta title={item.projectName} />
               </Card>
             )
           })}
