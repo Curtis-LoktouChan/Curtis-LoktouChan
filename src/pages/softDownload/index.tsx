@@ -8,7 +8,7 @@ import { Layout } from 'antd'
 
 // import Header from "../components/header";
 // import Footer from "../components/footer";
-// import Raspberry from "./raspberry";
+import Raspberry from './raspberry'
 import Windows from './windows'
 // import Banner from "../components/banner";
 
@@ -20,7 +20,7 @@ const SoftDownloadPage: FC = () => {
       <Layout.Content>
         <Header />
         {/* <Banner imgSrc="assets/banners/softDownload.jpg" /> */}
-        {/* <Raspberry /> */}
+        <Raspberry />
         <Windows />
       </Layout.Content>
       {/* <Layout.Footer justify="space-around" align="middle"> */}
