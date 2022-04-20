@@ -104,7 +104,7 @@ const caseShow: FC = () => {
                     }
                     title={
                       <a
-                        href={'/caseShow/viewCase/' + item.ID}
+                        href={'/viewCase/' + item.ID}
                         onClick={(e) => {
                           e.preventDefault()
                           // onClickViewCase(item.ID);
@@ -124,7 +124,14 @@ const caseShow: FC = () => {
                       <Row>
                         <Col>
                           {' '}
-                          <Button type="link">编辑</Button>
+                          <Button
+                            type="link"
+                            onClick={() => {
+                              history.push('./edictCase')
+                            }}
+                          >
+                            编辑
+                          </Button>
                         </Col>
                         <Col>
                           <Popconfirm title="确认删除吗?" okText="是" cancelText="否">

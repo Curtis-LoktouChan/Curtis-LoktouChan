@@ -9,7 +9,9 @@ export default defineConfig({
     { path: '/home', component: '@/pages/home/index' },
     { path: '/login', component: '@/pages/login/index', exact: true },
     { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
-    { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true }
+    { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
+    { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
+    { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true }
   ],
   fastRefresh: {},
   define: {
