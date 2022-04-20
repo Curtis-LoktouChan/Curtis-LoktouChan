@@ -8,7 +8,8 @@ export default defineConfig({
     { path: '/', component: '@/pages/home/index' },
     { path: '/home', component: '@/pages/home/index' },
     { path: '/login', component: '@/pages/login/index', exact: true },
-    { path: '/case/index', component: '@/pages/caseShow/caseIndex', exact: true }
+    { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
+    { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true }
   ],
   fastRefresh: {},
   define: {
