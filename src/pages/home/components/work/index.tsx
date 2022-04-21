@@ -66,7 +66,13 @@ const Work: FC = () => {
         </div>
         {whetherToRender()}
 
-        <Button size="small" type="link">
+        <Button
+          size="small"
+          type="link"
+          onClick={() => {
+            history.push('./customerWork')
+          }}
+        >
           查看更多
         </Button>
       </div>

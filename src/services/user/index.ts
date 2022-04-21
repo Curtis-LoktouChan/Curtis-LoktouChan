@@ -5,11 +5,11 @@ import { IUserLoginRequest, IUserLoginResponse } from './types'
 export default {
   login: apiHandle<IUserLoginRequest, IBaseResp<IUserLoginResponse>>({
     method: 'GET', // TODO json-server mock
-    url: 'login'
+    url: 'api/v1/base/login'
   }),
   loginWithToken: apiHandle<null, IBaseResp<IUserLoginResponse>>({
     method: 'GET', // json-server mock
-    url: 'token_login'
+    url: 'api/v1/base/tokenLogin'
   }),
   logout: apiHandle<null, IBaseResp>({
     method: 'GET',
