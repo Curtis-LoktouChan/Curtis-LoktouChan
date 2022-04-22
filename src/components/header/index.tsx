@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'dva'
 import { ACTIONS } from '@/models'
 
 import styles from './index.less'
-import logo from './logo.png'
+import logo from '@/assets/logo.png'
 
 const Header: FC = () => {
   const user = useSelector((state: any) => state.user)
