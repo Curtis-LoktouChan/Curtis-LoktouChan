@@ -1,13 +1,11 @@
 import { FC } from 'react'
-import { ConfigProvider, Layout, Button } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 
 import styles from './index.less'
-import HomeService from '@/services/home'
-import { useRequest } from 'ahooks'
 
 import Header from '@/components/header'
-import MyCarousel from './components/myCarousel'
+import MyCarousel from './components/carousel'
 import Introduction from './components/introduction'
 import Hardware from './components/hardware'
 import Course from './components/course'

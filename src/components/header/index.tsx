@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { history } from 'umi'
-import { Image, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd'
+import { Image, Avatar, Menu, Dropdown, Button } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'dva'
 import { ACTIONS } from '@/models'
@@ -8,19 +8,19 @@ import { ACTIONS } from '@/models'
 import styles from './index.less'
 import logo from './logo.png'
 
-const Header: FC = (props) => {
+const Header: FC = () => {
   const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
 
   const loginMenu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="1">
         <span style={{ color: '#1890ff' }} onClick={() => history.push('./login')}>
           登录
         </span>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item>
+      <Menu.Item key="2">
         <span style={{ color: '#1890ff' }} onClick={() => history.push('./signUP')}>
           注册
         </span>
@@ -29,13 +29,13 @@ const Header: FC = (props) => {
   )
   const loggedInMenu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="1">
         <span style={{ color: 'black' }} onClick={() => history.push('/customerCenter')}>
           我的信息
         </span>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item>
+      <Menu.Item key="2">
         <span style={{ color: 'black' }} onClick={() => history.push('/customerForgotPassword')}>
           修改密码
         </span>
@@ -48,6 +48,7 @@ const Header: FC = (props) => {
             type: ACTIONS.user.logout
           })
         }}
+        key="3"
       >
         退出登录
       </Menu.Item>
@@ -56,7 +57,7 @@ const Header: FC = (props) => {
 
   // 自动登录代替数据持久化
   useEffect(() => {
-    if (user?.isLogin) {
+    if (user?.isLogin || !localStorage.getItem('login_token')) {
       return
     }
     dispatch({

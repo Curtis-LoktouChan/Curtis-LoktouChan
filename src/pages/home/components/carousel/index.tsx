@@ -9,10 +9,6 @@ import carousel4 from '@/assets/carousels/carousel4.jpg'
 const MyCarousel: FC = () => {
   return (
     <Carousel autoplay>
-      {/* <Image src="src/assets/carousels/carousel1.jpg" preview={false}/>
-      <Image src="src/assets/carousels/carousel2.jpg" preview={false}/>
-      <Image src="src/assets/carousels/carousel3.jpg" preview={false}/>
-      <Image src="src/assets/carousels/carousel4.jpg" preview={false}/> */}
       <Image src={carousel1} preview={false} />
       <Image src={carousel2} preview={false} />
       <Image src={carousel3} preview={false} />

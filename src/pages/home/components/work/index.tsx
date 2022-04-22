@@ -7,7 +7,7 @@ import { useSelector } from 'dva'
 
 import styles from './index.less'
 import work from '@/assets/works/work.png'
-import WorkServices from '@/services/work'
+import { WorkServices } from '@/services'
 
 const { Meta } = Card
 
@@ -15,10 +15,7 @@ const Work: FC = () => {
   const user = useSelector((state: any) => state.user) // 用户信息
 
   const { data: works } = useRequest(WorkServices.getWorks, {
-    onSuccess: (res) => {
-      console.log(res)
-      return res
-    }
+    defaultParams: [null, { noNotification: true }]
   })
 
   const whetherToRender = () => {
