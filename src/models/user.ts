@@ -1,5 +1,5 @@
 import { Effect, Reducer } from 'umi'
-import UserService from '@/services/user'
+import { UserServices } from '@/services'
 import { IBaseResp } from '@/utils/types'
 import { IUserLoginResponse } from '@/services/user/types'
 import { BASE_AVATAR_SRC } from '@/constants'
@@ -37,7 +37,7 @@ const userModel: IUserModel = {
     // 手动登录
     *loginEffect({ payload, callback }, { call, put }) {
       // 执行异步函数
-      const res: IUserLoginResponse = yield call(() => UserService.login(payload))
+      const res: IUserLoginResponse = yield call(() => UserServices.login(payload))
       if (res) {
         callback && callback(res)
         yield put({
@@ -48,18 +48,24 @@ const userModel: IUserModel = {
     },
     // token 登录
     *loginWithTokenEffect({ payload, callback }, { call, put }) {
-      const res: IUserLoginResponse = yield call(() => UserService.loginWithToken())
-      console.log(res)
-      if (res) {
+      const res: IBaseResp = yield call(() =>
+        UserServices.loginWithToken(null, { noNotification: true })
+      )
+      // 手动判断业务逻辑
+      if (res?.code === 200) {
         callback && callback(res)
         yield put({
           type: 'login',
           payload: res
         })
+      } else {
+        yield put({
+          type: 'logout'
+        })
       }
     },
     *logoutEffect({ payload, callback }, { call, put }) {
-      const res: IBaseResp = yield call(() => UserService.logout())
+      const res: IBaseResp = yield call(() => UserServices.logout(null, { noNotification: true }))
       if (res.code === 200) {
         callback && callback(res)
         localStorage.setItem('login_token', '')
@@ -72,7 +78,6 @@ const userModel: IUserModel = {
   },
   reducers: {
     login(state, action) {
-      console.log('login', action)
       return {
         ...state,
         isLogin: true,
@@ -83,8 +88,7 @@ const userModel: IUserModel = {
         }
       }
     },
-    logout(state, action) {
-      console.log('logout', action)
+    logout(state) {
       return {
         ...state,
         isLogin: false,

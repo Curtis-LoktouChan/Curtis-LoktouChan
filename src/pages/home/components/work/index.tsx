@@ -7,7 +7,7 @@ import { useSelector } from 'dva'
 
 import styles from './index.less'
 import work from '@/assets/works/work.png'
-import WorkServices from '@/services/work'
+import { WorkServices } from '@/services'
 
 const { Meta } = Card
 
@@ -15,33 +15,25 @@ const Work: FC = () => {
   const user = useSelector((state: any) => state.user) // 用户信息
 
   const { data: works } = useRequest(WorkServices.getWorks, {
-    onSuccess: (res) => {
-      console.log(res)
-      return res
-    }
+    defaultParams: [null, { noNotification: true }]
   })
 
   const whetherToRender = () => {
     return user?.isLogin ? (
       // 登录时内容区
-      <div>
-        <div className={styles.workContext}>
-          {works?.workList?.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                className={styles.workCard}
-                hoverable
-                cover={<img src={work} alt="我的作品" />}
-              >
-                <Meta title={item.projectName} />
-              </Card>
-            )
-          })}
-        </div>
-        <Upload className={styles.upload}>
-          <Button icon={<UploadOutlined />}>上传作品</Button>
-        </Upload>
+      <div className={styles.workContext}>
+        {works?.workList?.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              className={styles.workCard}
+              hoverable
+              cover={<img src={work} alt="我的作品" />}
+            >
+              <Meta title={item.projectName} />
+            </Card>
+          )
+        })}
       </div>
     ) : (
       // 未登录时内容区
@@ -65,8 +57,19 @@ const Work: FC = () => {
           <span>我的作品</span>
         </div>
         {whetherToRender()}
+        {user?.isLogin && (
+          <Upload className={styles.upload}>
+            <Button icon={<UploadOutlined />}>上传作品</Button>
+          </Upload>
+        )}
 
-        <Button size="small" type="link">
+        <Button
+          size="small"
+          type="link"
+          onClick={() => {
+            history.push('./customerWork')
+          }}
+        >
           查看更多
         </Button>
       </div>
