@@ -1,19 +1,14 @@
 import { FC } from 'react'
-
-import { connect } from 'react-redux'
 import { Button, Image, Row } from 'antd'
 import { WindowsFilled, FileAddTwoTone } from '@ant-design/icons'
+
 import styles from './index.less'
 import aboutUs from '../../assets/aboutUs.png'
-// import { actions } from "../../constant";
 
 const Windows: FC = () => {
   const handleCardOnClickNOR = () => {
     window.open(' https://pan.baidu.com/s/1qXN-A3ck3tn7oZhKzsRlTw')
   }
-  // const handleCardOnClickPRO = () => {
-  //   window.open("https://pan.baidu.com/s/1wx6ZC-zg8r0rtOWeORoygg");
-  // };
 
   return (
     <div className={styles.windowsContainer}>
@@ -41,17 +36,6 @@ const Windows: FC = () => {
               <br></br>
               <br></br>
             </Row>
-            {/* <Row>
-                <p style={{ color: "red" }}>专业版链接：提取码:gyy2</p>
-                &nbsp;&nbsp;&nbsp;
-                <Button
-                  type="primary"
-                  icon={<FileAddTwoTone />}
-                  onClick={handleCardOnClickPRO}
-                >
-                  点我下载
-                </Button>
-              </Row> */}
           </div>
         </div>
       </div>
