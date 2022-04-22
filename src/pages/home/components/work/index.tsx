@@ -24,24 +24,19 @@ const Work: FC = () => {
   const whetherToRender = () => {
     return user?.isLogin ? (
       // 登录时内容区
-      <div>
-        <div className={styles.workContext}>
-          {works?.workList?.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                className={styles.workCard}
-                hoverable
-                cover={<img src={work} alt="我的作品" />}
-              >
-                <Meta title={item.projectName} />
-              </Card>
-            )
-          })}
-        </div>
-        <Upload className={styles.upload}>
-          <Button icon={<UploadOutlined />}>上传作品</Button>
-        </Upload>
+      <div className={styles.workContext}>
+        {works?.workList?.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              className={styles.workCard}
+              hoverable
+              cover={<img src={work} alt="我的作品" />}
+            >
+              <Meta title={item.projectName} />
+            </Card>
+          )
+        })}
       </div>
     ) : (
       // 未登录时内容区
@@ -65,6 +60,11 @@ const Work: FC = () => {
           <span>我的作品</span>
         </div>
         {whetherToRender()}
+        {user?.isLogin && (
+          <Upload className={styles.upload}>
+            <Button icon={<UploadOutlined />}>上传作品</Button>
+          </Upload>
+        )}
 
         <Button
           size="small"
