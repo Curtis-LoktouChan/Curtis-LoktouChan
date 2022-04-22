@@ -69,7 +69,7 @@ const Header: FC = () => {
     <div className={styles.headerContainer}>
       <div className={styles.headerInner}>
         <div className={styles.first}>
-          <Image src={logo} width={150} preview={false} />
+          <Image src={logo} width={150} preview={false} onClick={() => history.push('./home')} />
         </div>
         <div className={styles.second}>
           <Button type="link" onClick={() => history.push('./aboutUs')}>
