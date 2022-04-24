@@ -1,5 +1,5 @@
 import { Effect, Reducer } from 'umi'
-import UserService from '@/services/user'
+import { UserServices } from '@/services'
 import { IBaseResp } from '@/utils/types'
 import { IUserLoginResponse } from '@/services/user/types'
 import { BASE_AVATAR_SRC } from '@/constants'
@@ -37,7 +37,7 @@ const userModel: IUserModel = {
     // 手动登录
     *loginEffect({ payload, callback }, { call, put }) {
       // 执行异步函数
-      const res: IUserLoginResponse = yield call(() => UserService.login(payload))
+      const res: IUserLoginResponse = yield call(() => UserServices.login(payload))
       if (res) {
         callback && callback(res)
         yield put({
@@ -48,20 +48,31 @@ const userModel: IUserModel = {
     },
     // token 登录
     *loginWithTokenEffect({ payload, callback }, { call, put }) {
-      const res: IUserLoginResponse = yield call(() => UserService.loginWithToken())
-      if (res) {
+      const res: IBaseResp = yield call(() =>
+        UserServices.loginWithToken(null, { noNotification: true })
+      )
+      // 手动判断业务逻辑
+      if (res?.code === 200) {
         callback && callback(res)
         yield put({
           type: 'login',
           payload: res
         })
+      } else {
+        yield put({
+          type: 'logout'
+        })
       }
     },
     *logoutEffect({ payload, callback }, { call, put }) {
-      const res: IBaseResp = yield call(() => UserService.logout())
+      const res: IBaseResp = yield call(() => UserServices.logout(null, { noNotification: true }))
       if (res.code === 200) {
         callback && callback(res)
-        localStorage.clear()
+        localStorage.setItem('login_token', '')
+        yield put({
+          type: 'logout',
+          payload: res
+        })
       }
     }
   },
@@ -71,9 +82,9 @@ const userModel: IUserModel = {
         ...state,
         isLogin: true,
         userInfo: {
-          username: action?.payload?.username,
+          username: action?.payload?.userInfo?.username,
           login_token: action?.payload?.login_token,
-          avatarSrc: action?.payload?.avatarSrc || BASE_AVATAR_SRC
+          avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC
         }
       }
     },

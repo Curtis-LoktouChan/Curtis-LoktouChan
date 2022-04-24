@@ -1,0 +1,50 @@
+.footerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    width: 68.75%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.footerHeaderLogo,
+.footerHeaderQrCode {
+  display: flex;
+  justify-content: center;
+}
+
+.footerHeaderLink {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    flex-flow: column wrap;
+  }
+}
+
+.footerBody {
+  text-align: center;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: -10px;
+  padding-bottom: 10px;
+}
+
+@media all and (min-width: 700px) {
+  .footerHeader {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+  }
+}

@@ -11,7 +11,9 @@ export default defineConfig({
     { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
     { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
     { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
-    { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true }
+    { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true },
+    { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
+    { path: '/login', component: '@/pages/login/index', exact: true }
   ],
   fastRefresh: {},
   define: {
@@ -21,5 +23,6 @@ export default defineConfig({
     }
   },
   dva: {},
-  antd: {}
+  antd: {},
+  mfsu: {}
 })

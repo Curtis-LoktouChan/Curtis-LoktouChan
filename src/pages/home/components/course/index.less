@@ -1,0 +1,60 @@
+.courseOuter {
+  margin: 25px;
+
+  > div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    > button {
+      align-self: flex-end;
+    }
+  }
+}
+
+.courseHeader {
+  text-align: center;
+  margin-bottom: 5px;
+
+  > span:nth-child(1) {
+    vertical-align: middle;
+    transform: scale(1.5);
+  }
+
+  > span:nth-child(2) {
+    vertical-align: middle;
+    font-size: 18px;
+    color: #333;
+    padding-left: 10px;
+  }
+}
+
+@media all and (min-width: 700px) {
+  .courseOuter {
+    width: 68.75%;
+    margin: auto;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+    }
+  }
+
+  .courseHeader {
+    margin: 50px 0 30px 0;
+    text-align: center;
+
+    > span:nth-child(1) {
+      vertical-align: middle;
+      transform: scale(2);
+    }
+
+    > span:nth-child(2) {
+      vertical-align: middle;
+      font-size: 36px;
+      color: #333;
+      padding-left: 15px;
+    }
+  }
+}

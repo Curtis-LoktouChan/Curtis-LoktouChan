@@ -3,6 +3,7 @@ import { history } from 'umi'
 import { notification } from 'antd'
 
 import { BASE_URL } from '@/constants'
+import { IBaseResp } from '../types'
 
 const errorType = {
   systemError: 1111,
@@ -15,19 +16,18 @@ interface IErrorData {
   data?: any
 }
 
-const errorHandler = (error: ResponseError<IErrorData>): Promise<Response> => {
-  console.log(error)
-  if (!error.data) {
+const errorHandler = (error: ResponseError<IErrorData>): void => {
+  const { data, response } = error
+  if (!data.code && 400 <= response?.status && response?.status < 500) {
     notification.error({
-      message: '系统或网络错误，请检查后重试',
+      message: '系统或网络错误，请检查后重试', // TODO 判断客户端错误类型
       duration: 3
     })
-    // TODO 判断客户端错误类型
-    return Promise.reject({ code: errorType.netWorkError, message: '网络错误', error: error })
+    return
   }
 
   // 登录验证重定向处理
-  if (error.response?.redirected) {
+  if (response?.redirected) {
     history.replace({
       pathname: '/login',
       search: JSON.stringify({
@@ -36,13 +36,6 @@ const errorHandler = (error: ResponseError<IErrorData>): Promise<Response> => {
     })
 
     localStorage.clear()
-  }
-
-  // 是否自定义通知处理
-  const { options } = error.request || {}
-  // TODO 需要增加对自定义的 options 选项的 ts 提示
-  if (options?.noNotification) {
-    return Promise.reject(error)
   }
 
   // 统一错误通知处理
@@ -54,8 +47,6 @@ const errorHandler = (error: ResponseError<IErrorData>): Promise<Response> => {
     description: error.data?.msg,
     duration: 3
   })
-
-  return Promise.reject(error)
 }
 
 const request = extend({
@@ -71,7 +62,7 @@ request.interceptors.request.use((url, options: RequestOptionsInit) => {
   const { headers = {} } = options || {}
 
   const newHeaders = {
-    login_token: loginToken,
+    Authorization: loginToken,
     ...headers
   }
 
@@ -90,14 +81,23 @@ request.interceptors.request.use((url, options: RequestOptionsInit) => {
   }
 })
 
-request.interceptors.response.use(async (response) => {
+request.interceptors.response.use(async (response, options) => {
   const res = await response.clone().json()
 
-  if (response.ok && 200 <= res?.code && 300 > res?.code) {
-    return res?.data || res
+  // http 错误处理
+  if (!response.ok || response?.status < 200 || response?.status >= 300) {
+    return Promise.reject({ response, data: res })
   }
 
-  return Promise.reject({ ...res, data: res })
+  if (options?.options?.noNotification) {
+    // 自定义结果处理，无论正确与否
+    return res as IBaseResp
+  } else if (res?.code < 200 || res?.code >= 300) {
+    // 业务逻辑错误处理
+    return Promise.reject({ response, data: res })
+  } else {
+    return res?.data || (res as IBaseResp)
+  }
 })
 
 export default request

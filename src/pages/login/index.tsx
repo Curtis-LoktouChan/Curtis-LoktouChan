@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { history } from 'umi'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useDispatch } from 'dva'
