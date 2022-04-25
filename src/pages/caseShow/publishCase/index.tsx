@@ -3,8 +3,6 @@ import { ConfigProvider, Layout } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 
 import styles from './index.less'
-import HomeService from '@/services/home'
-import { useRequest } from 'ahooks'
 
 import { UploadOutlined, LeftCircleTwoTone } from '@ant-design/icons'
 import { PageHeader, Form, Col, Button, Row, Input, Upload, message } from 'antd'
