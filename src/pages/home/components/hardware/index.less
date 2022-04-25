@@ -1,0 +1,103 @@
+.hardwareOuter {
+  margin: 25px;
+
+  > div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    > button {
+      align-self: flex-end;
+    }
+  }
+}
+
+.hardwareTitle {
+  text-align: center;
+  margin-bottom: 5px;
+
+  > span:nth-child(1) {
+    vertical-align: middle;
+    transform: scale(1.5);
+  }
+
+  > span:nth-child(2) {
+    vertical-align: middle;
+    font-size: 18px;
+    color: #333;
+    padding-left: 10px;
+  }
+}
+
+.hardwareContext {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  > .hardwareCard {
+    width: 280px;
+    text-align: center;
+  }
+
+  > div {
+    margin: 5px 0;
+  }
+}
+
+@media all and (min-width: 700px) {
+  .hardwareOuter {
+    width: 100%;
+    margin: 25px 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    > div {
+      width: 68.75%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: baseline;
+
+      > button {
+        margin: 20px 0;
+      }
+    }
+  }
+
+  .hardwareTitle {
+    text-align: center;
+    margin: 50px 0 30px 0;
+
+    > span:nth-child(1) {
+      vertical-align: middle;
+      transform: scale(2);
+    }
+
+    > span:nth-child(2) {
+      vertical-align: middle;
+      font-size: 36px;
+      color: #333;
+      padding-left: 15px;
+    }
+  }
+
+  .hardwareContext {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+
+    > .hardwareCard > div:first-child {
+      width: 250px;
+      height: 250px;
+    }
+
+    > .hardwareCard > div:last-child {
+      padding: 20px;
+    }
+  }
+}
