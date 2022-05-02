@@ -78,8 +78,8 @@ const Header: FC = () => {
           <Button type="link" onClick={() => history.push('./hardware')}>
             硬件系统
           </Button>
-          <Button type="link" onClick={() => history.push('./course')}>
-            教学案例
+          <Button type="link" onClick={() => history.push('./case')}>
+            案例展示
           </Button>
           <Button type="link" onClick={() => history.push('./softDownload')}>
             下载软件
