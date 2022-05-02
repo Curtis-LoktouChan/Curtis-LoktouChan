@@ -75,8 +75,8 @@ const Header: FC = () => {
           <Button type="link" onClick={() => history.push('./aboutUs')}>
             关于我们
           </Button>
-          <Button type="link" onClick={() => history.push('./hardware')}>
-            硬件系统
+          <Button type="link" onClick={() => history.push('./courseCenter')}>
+            课程展示
           </Button>
           <Button type="link" onClick={() => history.push('./case')}>
             案例展示

@@ -14,7 +14,8 @@ export default defineConfig({
     { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
     { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true },
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
-    { path: '/login', component: '@/pages/login/index', exact: true }
+    { path: '/login', component: '@/pages/login/index', exact: true },
+    { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true }
   ],
   fastRefresh: {},
   define: {
