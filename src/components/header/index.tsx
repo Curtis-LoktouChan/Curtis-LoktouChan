@@ -76,7 +76,7 @@ const Header: FC = () => {
             关于我们
           </Button>
           <Button type="link" onClick={() => history.push('./courseCenter')}>
-            课程展示
+            课程中心
           </Button>
           <Button type="link" onClick={() => history.push('./case')}>
             案例展示

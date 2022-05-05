@@ -4,6 +4,7 @@ import zhCN from 'antd/lib/locale/zh_CN'
 
 import styles from './index.less'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 import { useRequest } from 'ahooks'
 import { useState } from 'react'
 import { List, Avatar, Row, PageHeader, Button, Input, message, Col, Modal, Form } from 'antd'
@@ -79,9 +80,9 @@ const courseCenter: FC = () => {
                   itemLayout="vertical"
                   size="small"
                   pagination={{
-                    onChange: (page: number) => {
-                      getList({ page })
-                    },
+                    // onChange: (page: number) => {
+                    //   getList({ page })
+                    // },
                     defaultPageSize: 10,
                     total: data1?.total
                   }}
@@ -118,7 +119,6 @@ const courseCenter: FC = () => {
                     </List.Item>
                   )}
                 />
-                )
               </Col>
             </Row>
             <Modal
@@ -135,9 +135,16 @@ const courseCenter: FC = () => {
             </Modal>
           </div>
         </Layout.Content>
+
         <Layout.Footer
-          style={{ justifyContent: 'space-around', alignItems: 'center' }}
-        ></Layout.Footer>
+          style={{
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            backgroundColor: '#f4fbff'
+          }}
+        >
+          <Footer />
+        </Layout.Footer>
       </Layout>
     </ConfigProvider>
   )

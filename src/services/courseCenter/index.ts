@@ -1,5 +1,5 @@
 import apiHandle from '@/utils/request'
-
+import { PREFIX_URL_V1 } from '@/constants'
 import {
   IcourseCenterRequest,
   IcourseCenterResponse,
@@ -10,10 +10,10 @@ import {
 export default {
   getList: apiHandle<IcourseCenterRequest, IcourseCenterResponse>({
     method: 'GET',
-    url: 'api2'
+    url: `${PREFIX_URL_V1}student/class`
   }),
   joinClass: apiHandle<joinClassRequest, joinClassResponse>({
-    method: 'GET',
-    url: 'api'
+    method: 'POST',
+    url: `${PREFIX_URL_V1}student/class`
   })
 }
