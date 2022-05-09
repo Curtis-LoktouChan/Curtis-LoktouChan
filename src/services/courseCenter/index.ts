@@ -10,7 +10,7 @@ import {
 export default {
   getList: apiHandle<IcourseCenterRequest, IcourseCenterResponse>({
     method: 'GET',
-    url: `${PREFIX_URL_V1}student/class`
+    url: `${PREFIX_URL_V1}courseCenter/getCourseList`
   }),
   joinClass: apiHandle<joinClassRequest, joinClassResponse>({
     method: 'POST',

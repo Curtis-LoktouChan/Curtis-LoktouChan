@@ -8,26 +8,28 @@ import Footer from '@/components/footer'
 import { useRequest } from 'ahooks'
 import { useState } from 'react'
 import { List, Avatar, Row, PageHeader, Button, Input, message, Col, Modal, Form } from 'antd'
+import { LockOutlined } from '@ant-design/icons'
+import { useSelector } from 'dva'
+import { history } from 'umi'
 
 import courseService from '@/services/courseCenter'
 
 const courseCenter: FC = () => {
-  const login_token = localStorage.getItem('login_token')
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [classID, setclassID] = useState(0)
   const [joinClassForm] = Form.useForm()
   //请求数据
-  const { data: data1, run: getList } = useRequest(courseService.getList, {
-    defaultParams: [{ token: login_token }],
-    onSuccess: (res) => {
-      console.log(res)
-      return res
-    }
+  const isLogin = useSelector((state: any) => state.user.isLogin)
+
+  const { data: courseList, run: getList } = useRequest(courseService.getList, {
+    // onSuccess: (res) => {
+    //   console.log(res)
+    //   return res
+    // }
   })
-  const { data: data2, run: joinClass } = useRequest(courseService.joinClass, {
+  const { data: joinClassMsg, run: joinClass } = useRequest(courseService.joinClass, {
     manual: true,
     onSuccess: (res) => {
-      console.log(res)
       message.info(res.msg)
       return res
     }
@@ -41,8 +43,12 @@ const courseCenter: FC = () => {
   const handleOk = () => {
     setIsModalVisible(false)
     //加入班级
-    const invitePwd = joinClassForm.getFieldValue('invitePwd')
-    joinClass({ classID, invitePwd })
+    try {
+      const invitePwd = joinClassForm.getFieldValue('invitePwd')
+      joinClass({ classID, invitePwd })
+    } catch (error) {
+      message.info('请重新加入！')
+    }
   }
   const handleCancel = () => {
     setIsModalVisible(false)
@@ -76,49 +82,61 @@ const courseCenter: FC = () => {
                     </Col>
                   }
                 />
-                <List
-                  itemLayout="vertical"
-                  size="small"
-                  pagination={{
-                    // onChange: (page: number) => {
-                    //   getList({ page })
-                    // },
-                    defaultPageSize: 10,
-                    total: data1?.total
-                  }}
-                  dataSource={data1?.courseList}
-                  renderItem={(item) => (
-                    <List.Item
-                      key={item.id}
-                      extra={
-                        <img
-                          width={200}
-                          alt="logo"
-                          src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                        />
-                      }
-                    >
-                      <List.Item.Meta
-                        avatar={<Avatar src="https://joeschmoe.io/api/v1/jeane" />}
-                        title={<h1 style={{ color: 'green' }}>{item.name}</h1>}
-                        description={
-                          '教师:  ' + item.username + ' , ' + '创建时间:' + item.created_at
+                {isLogin ? (
+                  <List
+                    itemLayout="vertical"
+                    size="small"
+                    pagination={{
+                      // onChange: (page: number) => {
+                      //   getList({ page })
+                      // },
+                      defaultPageSize: 10,
+                      total: courseList?.total
+                    }}
+                    dataSource={courseList?.courseList}
+                    renderItem={(item) => (
+                      <List.Item
+                        key={item.id}
+                        extra={
+                          <img
+                            width={200}
+                            alt="logo"
+                            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                          />
                         }
-                      />
-                      {'简介:  ' + item.classBrief}
+                      >
+                        <List.Item.Meta
+                          avatar={<Avatar src="https://joeschmoe.io/api/v1/jeane" />}
+                          title={<p style={{ color: 'green', fontSize: '24px' }}>{item.name}</p>}
+                          description={
+                            '教师:  ' + item.username + ' , ' + '创建时间:' + item.created_at
+                          }
+                        />
+                        {'简介:  ' + item.classBrief}
 
-                      <Row justify="end">
-                        <Button
-                          onClick={() => {
-                            showModal(item.id)
-                          }}
-                        >
-                          加入班级
-                        </Button>
-                      </Row>
-                    </List.Item>
-                  )}
-                />
+                        <Row justify="end">
+                          <Button
+                            onClick={() => {
+                              showModal(item.id)
+                            }}
+                          >
+                            加入班级
+                          </Button>
+                        </Row>
+                      </List.Item>
+                    )}
+                  />
+                ) : (
+                  <div
+                    className={styles.Unlogged}
+                    onClick={() => {
+                      history.push('./login')
+                    }}
+                  >
+                    <LockOutlined />
+                    <span>去登录</span>
+                  </div>
+                )}
               </Col>
             </Row>
             <Modal
