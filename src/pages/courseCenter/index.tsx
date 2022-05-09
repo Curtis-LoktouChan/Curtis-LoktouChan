@@ -56,7 +56,7 @@ const courseCenter: FC = () => {
 
   //搜索课程
   const onSearch = (text: string) => {
-    getList({ searchCourse: text })
+    getList({ searchText: text })
   }
   return (
     <ConfigProvider locale={zhCN}>

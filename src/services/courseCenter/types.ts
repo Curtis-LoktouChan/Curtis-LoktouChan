@@ -1,7 +1,7 @@
 export interface IcourseCenterRequest {
-  searchCourse?: string
-  page?: number
-  token?: string | null
+  searchText?: string
+  pageNum?: number
+  pageSize?: number
 }
 
 interface IcourseCenterShowData {
