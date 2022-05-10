@@ -1,0 +1,33 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+.Unlogged:hover {
+  cursor: pointer;
+
+  > span:nth-child(2) {
+    color: rgb(70, 72, 168);
+  }
+}
+.Unlogged {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-flow: column nowrap;
+  height: 400px;
+
+  > span:nth-child(1) {
+    margin-top: 30px;
+    transform: scale(4);
+
+    path {
+      color: #943737;
+    }
+  }
+
+  > span:nth-child(2) {
+    margin-top: 25px;
+  }
+}
