@@ -8,6 +8,9 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import styles from './index.less'
 
+const TEACHER = 1
+const STUDENT = 2
+
 const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
 
@@ -17,7 +20,7 @@ const userCenter: FC = (props) => {
       history.push('/waitToLogin')
     } else {
       // 已经登录，判断用户身份
-      if (user.userInfo.roleId === 2)
+      if (user.userInfo?.roleId === STUDENT)
         history.push('/userCenter/student/classList') // 学生跳转到学生班级页面
       else history.push('/userCenter/myClassList') // 教师直接跳转到班级页面
     }
@@ -52,7 +55,7 @@ const userCenter: FC = (props) => {
                 className={styles.itemSection}
                 icon={<UserSwitchOutlined />}
                 key="studentIdentity"
-                hidden={user.userInfo.roleId === 1 ? false : true} // 学生身份隐藏该选项
+                hidden={user.userInfo?.roleId === TEACHER ? false : true} // 学生身份隐藏该选项
                 onClick={() => {
                   history.push('/userCenter/student/classList')
                 }}
