@@ -1,5 +1,5 @@
 import { extend, RequestOptionsInit, ResponseError } from 'umi-request'
-import { history } from 'umi'
+import { ErrorShowType, history } from 'umi'
 import { notification } from 'antd'
 
 import { BASE_URL } from '@/constants'
@@ -16,14 +16,14 @@ interface IErrorData {
   data?: any
 }
 
-const errorHandler = (error: ResponseError<IErrorData>): void => {
+const errorHandler = (error: ResponseError<IErrorData>): any | void => {
   const { data, response } = error
   if (!data.code && 400 <= response?.status && response?.status < 500) {
     notification.error({
       message: '系统或网络错误，请检查后重试', // TODO 判断客户端错误类型
       duration: 3
     })
-    return
+    return Promise.reject({ code: errorType.systemError, msg: error })
   }
 
   // 登录验证重定向处理

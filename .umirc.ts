@@ -9,6 +9,17 @@ export default defineConfig({
     { path: '/home', component: '@/pages/home/index' },
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
     { path: '/login', component: '@/pages/login/index', exact: true },
+    { path: '/register', component: '@/pages/register/index', exact: true },
+    {
+      path: '/registerSuccess',
+      component: '@/pages/register/components/success/index',
+      exact: true
+    },
+    {
+      path: '/protocol',
+      component: '@/pages/register/components/protocol/index',
+      exact: true
+    }
     { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
     { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
     { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },

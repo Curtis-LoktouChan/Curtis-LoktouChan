@@ -21,7 +21,7 @@ const Header: FC = () => {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
-        <span style={{ color: '#1890ff' }} onClick={() => history.push('./signUP')}>
+        <span style={{ color: '#1890ff' }} onClick={() => history.push('./register')}>
           注册
         </span>
       </Menu.Item>

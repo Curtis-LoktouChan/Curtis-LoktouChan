@@ -2,6 +2,7 @@ export const ACTIONS = {
   user: {
     login: 'user/loginEffect',
     loginWithToken: 'user/loginWithTokenEffect',
-    logout: 'user/logoutEffect'
+    logout: 'user/logoutEffect',
+    register: 'user/registerEffect'
   }
 }
