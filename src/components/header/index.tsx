@@ -15,7 +15,7 @@ const Header: FC = () => {
   const loginMenu = (
     <Menu>
       <Menu.Item key="1">
-        <span style={{ color: '#1890ff' }} onClick={() => history.push('./login')}>
+        <span style={{ color: '#1890ff' }} onClick={() => history.push('/login')}>
           登录
         </span>
       </Menu.Item>
@@ -69,10 +69,10 @@ const Header: FC = () => {
     <div className={styles.headerContainer}>
       <div className={styles.headerInner}>
         <div className={styles.first}>
-          <Image src={logo} width={150} preview={false} onClick={() => history.push('./home')} />
+          <Image src={logo} width={150} preview={false} onClick={() => history.push('/home')} />
         </div>
         <div className={styles.second}>
-          <Button type="link" onClick={() => history.push('./aboutUs')}>
+          <Button type="link" onClick={() => history.push('/aboutUs')}>
             关于我们
           </Button>
           <Button type="link" onClick={() => history.push('./courseCenter')}>
@@ -81,10 +81,10 @@ const Header: FC = () => {
           <Button type="link" onClick={() => history.push('./case')}>
             案例展示
           </Button>
-          <Button type="link" onClick={() => history.push('./softDownload')}>
+          <Button type="link" onClick={() => history.push('/softDownload')}>
             下载软件
           </Button>
-          <Button type="link" onClick={() => history.push('./userCenter')}>
+          <Button type="link" onClick={() => history.push('/userCenter')}>
             个人中心
           </Button>
         </div>

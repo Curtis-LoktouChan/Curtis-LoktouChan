@@ -6,6 +6,7 @@ export interface IUserLoginRequest {
 export interface IUserLoginResponse {
   login_token: string
   username: string
+  roleId: number
 }
 
 export interface IUserRegisterRequest {

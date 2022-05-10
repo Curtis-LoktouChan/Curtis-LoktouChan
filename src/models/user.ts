@@ -10,6 +10,7 @@ export interface IUserModelState {
     username: string
     login_token: string
     avatarSrc?: string
+    roleId: number
   } | null
 }
 
@@ -84,7 +85,8 @@ const userModel: IUserModel = {
         userInfo: {
           username: action?.payload?.userInfo?.username,
           login_token: action?.payload?.login_token,
-          avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC
+          avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC,
+          roleId: action?.payload?.roleId
         }
       }
     },
