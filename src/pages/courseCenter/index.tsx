@@ -16,17 +16,12 @@ import courseService from '@/services/courseCenter'
 
 const courseCenter: FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [classID, setclassID] = useState(0)
+  const [classID, setClassId] = useState(0)
   const [joinClassForm] = Form.useForm()
   //请求数据
   const isLogin = useSelector((state: any) => state.user.isLogin)
 
-  const { data: courseList, run: getList } = useRequest(courseService.getList, {
-    // onSuccess: (res) => {
-    //   console.log(res)
-    //   return res
-    // }
-  })
+  const { data: courseList, run: getList } = useRequest(courseService.getList)
   const { data: joinClassMsg, run: joinClass } = useRequest(courseService.joinClass, {
     manual: true,
     onSuccess: (res) => {
@@ -38,7 +33,7 @@ const courseCenter: FC = () => {
   //加入班级
   const showModal = (classID: number) => {
     setIsModalVisible(true)
-    setclassID(classID)
+    setClassId(classID)
   }
   const handleOk = () => {
     setIsModalVisible(false)
@@ -87,9 +82,6 @@ const courseCenter: FC = () => {
                     itemLayout="vertical"
                     size="small"
                     pagination={{
-                      // onChange: (page: number) => {
-                      //   getList({ page })
-                      // },
                       defaultPageSize: 10,
                       total: courseList?.total
                     }}
