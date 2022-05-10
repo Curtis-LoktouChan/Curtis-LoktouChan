@@ -1,6 +1,12 @@
 import { defineConfig } from 'umi'
 
 export default defineConfig({
+  history: {
+    type: 'hash'
+  },
+  base: './',
+  publicPath: './',
+  hash: true,
   nodeModulesTransform: {
     type: 'none'
   },
@@ -19,7 +25,7 @@ export default defineConfig({
       path: '/protocol',
       component: '@/pages/register/components/protocol/index',
       exact: true
-    }
+    },
     { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
     { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
     { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
