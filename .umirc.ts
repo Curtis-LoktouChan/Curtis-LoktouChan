@@ -28,8 +28,8 @@ export default defineConfig({
           routes: [
             // 班级成员
             {
-              path: './classMenbers',
-              component: './userCenter/components/enterClass/components/classMenbers/index'
+              path: './classMembers',
+              component: './userCenter/components/enterClass/components/classMembers/index'
             },
             // 课程目录
             {
@@ -99,7 +99,9 @@ export default defineConfig({
     { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
     { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true },
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
-    { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true }
+    { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true },
+    { path: '/comingSoon', component: '@/pages/developing/index', exact: true }, // 请期待页面
+    { path: '/connectUs', component: '@/pages/connectUs/index', exact: true } // 联系我们页面
   ],
   fastRefresh: {},
   define: {

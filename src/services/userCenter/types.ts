@@ -13,7 +13,7 @@ interface ITeacherClassList {
 }
 
 // 一个班级成员的信息
-interface IClassMenber {
+interface IClassMember {
   uuid: string
   username: string
   nickName: string
@@ -74,8 +74,8 @@ export interface IAddStudents {
 }
 
 // 获取班级成员响应
-export interface IGetClassMenbersResponse {
-  classMenbers: IClassMenber[]
+export interface IGetClassMembersResponse {
+  classMembers: IClassMember[]
 }
 
 // 撤销学生选课请求

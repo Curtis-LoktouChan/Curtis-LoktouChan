@@ -3,7 +3,7 @@ import {
   ITeacherClassListResponse,
   ICreateClass,
   IAddStudents,
-  IGetClassMenbersResponse,
+  IGetClassMembersResponse,
   IDeleteStudent,
   IUpdateStudentInfo,
   IGetStudentClassListResponse,
@@ -34,7 +34,7 @@ export default {
     url: `${PREFIX_URL_V1}teacher/addStudentBatch`
   }),
   // 教师获取班级成员
-  getClassMenbers: apiHandle<string, IGetClassMenbersResponse>({
+  getClassMembers: apiHandle<string, IGetClassMembersResponse>({
     method: 'GET',
     url: `${PREFIX_URL_V1}teacher/studentList`
   }),

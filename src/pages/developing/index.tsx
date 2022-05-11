@@ -7,32 +7,24 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import styles from './index.less'
 
-const waitToLogin: FC = () => {
+const Developing: FC = () => {
   return (
     <Layout>
-      <Layout.Content className={styles.waitToLoginContainer}>
+      <Layout.Content style={{ backgroundColor: 'white' }}>
         <Header />
         <Result
           icon={<RocketTwoTone />}
-          title="您尚未登录"
+          title="我们正在努力，敬请期待~"
           extra={
             <span>
               <Button
                 type="primary"
+                size="large"
                 onClick={() => {
                   history.push('/home')
                 }}
               >
                 返回主页
-              </Button>
-              &nbsp;&nbsp;&nbsp;
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.push('/login')
-                }}
-              >
-                去登陆
               </Button>
             </span>
           }
@@ -51,4 +43,4 @@ const waitToLogin: FC = () => {
   )
 }
 
-export default waitToLogin
+export default Developing

@@ -8,8 +8,8 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import styles from './index.less'
 
-const TEACHER = 1
-const STUDENT = 2
+const STUDENT = 1
+const TEACHER = 2
 
 const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
@@ -46,7 +46,8 @@ const userCenter: FC = (props) => {
                 icon={<FileWordFilled />}
                 key="myWork"
                 onClick={() => {
-                  history.push('/customerWork')
+                  // history.push('/customerWork')
+                  history.push('/comingSoon')
                 }}
               >
                 我的作品

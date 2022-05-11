@@ -122,7 +122,7 @@ const enterClass: FC = (props) => {
               icon={<AliwangwangOutlined />}
               key="myWork"
               onClick={() => {
-                history.push('/userCenter/enterClass/classMenbers')
+                history.push('/userCenter/enterClass/classMembers')
               }}
             >
               班级成员

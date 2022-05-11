@@ -7,27 +7,30 @@ import { UserOutlined } from '@ant-design/icons'
 import styles from './index.less'
 import { UserCenterServices } from '@/services'
 
-const ClassMenbers: FC = () => {
+const STUDENT = '1'
+const TEACHER = '2'
+
+const ClassMembers: FC = () => {
   const [isSettingPhone, setIsSettingPhone] = useState(false)
   const [isSettingName, setIsSettingName] = useState(false)
   const userCenter = useSelector((state: any) => state.userCenter)
-  const [classMenbers, setClassMenbers] = useState<any>([])
+  const [classMembers, setClassMembers] = useState<any>([])
   // 获取班级成员列表数据
-  const { data: classMenbersData, run: runGetClassMenbers } = useRequest(
-    UserCenterServices.getClassMenbers,
+  const { data: classMembersData, run: runGetClassMembers } = useRequest(
+    UserCenterServices.getClassMembers,
     {
       manual: true,
       onSuccess: () => {
-        const menbers = classMenbersData?.classMenbers.map((menber, index) => {
+        const members = classMembersData?.classMembers.map((member, index) => {
           return {
-            menberIndex: index + 1,
-            name: menber.username,
-            nickName: menber.nickName,
-            roleId: menber.roleId,
-            phoneNumber: menber.telephone
+            memberIndex: index + 1,
+            name: member.username,
+            nickName: member.nickName,
+            roleId: member.roleId,
+            phoneNumber: member.telephone
           }
         })
-        setClassMenbers(menbers)
+        setClassMembers(members)
       }
     }
   )
@@ -48,7 +51,7 @@ const ClassMenbers: FC = () => {
 
   // 组件挂载即请求获取学生数据
   useEffect(() => {
-    runGetClassMenbers(userCenter.classId)
+    runGetClassMembers(userCenter.classId)
   }, [])
 
   // 撤销选课
@@ -68,8 +71,8 @@ const ClassMenbers: FC = () => {
   const columns = [
     {
       title: '序号',
-      dataIndex: 'menberIndex',
-      key: 'menberIndex'
+      dataIndex: 'memberIndex',
+      key: 'memberIndex'
     },
     {
       title: '头像',
@@ -115,7 +118,7 @@ const ClassMenbers: FC = () => {
       dataIndex: 'roleId',
       key: 'roleId',
       render: (roleId: string) => {
-        if (roleId === '1') {
+        if (roleId === TEACHER) {
           return <Tag color="purple">教师</Tag>
         } else {
           return <Tag color="blue">学生</Tag>
@@ -152,7 +155,7 @@ const ClassMenbers: FC = () => {
       dataIndex: 'action',
       key: 'action',
       render: (_: any, record: any) => {
-        if (record.roleId === '1') {
+        if (record.roleId === STUDENT) {
           return null
         } else {
           return (
@@ -179,13 +182,13 @@ const ClassMenbers: FC = () => {
 
   return (
     <Table
-      rowKey={(record) => record.menberIndex} // 每一行的key值，不设会报错
-      className={styles.classMenbersTable}
+      rowKey={(record) => record.memberIndex} // 每一行的key值，不设会报错
+      className={styles.classMembersTable}
       columns={columns}
-      dataSource={classMenbers}
+      dataSource={classMembers}
       pagination={{ position: ['bottomCenter'] }}
     />
   )
 }
 
-export default ClassMenbers
+export default ClassMembers

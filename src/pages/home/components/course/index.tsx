@@ -17,7 +17,7 @@ const Course: FC = () => {
           size="small"
           type="link"
           onClick={() => {
-            history.push('./course')
+            history.push('/courseCenter')
           }}
         >
           查看更多

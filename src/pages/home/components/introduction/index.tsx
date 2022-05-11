@@ -28,7 +28,8 @@ const Introduction: FC = () => {
               size="small"
               type="link"
               onClick={() => {
-                history.push('./aboutUs')
+                // history.push('./aboutUs')
+                history.push('/comingSoon')
               }}
             >
               查看更多

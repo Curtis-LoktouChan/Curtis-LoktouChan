@@ -6,7 +6,7 @@ import { useRequest } from 'ahooks'
 import styles from './index.less'
 import { UserCenterServices } from '@/services'
 
-const ClassMenbers: FC = () => {
+const ClassMembers: FC = () => {
   const userCenter = useSelector((state: any) => state.userCenter)
   // 获取班级成员列表数据
   const { data: courses, run: runGetCourses } = useRequest(UserCenterServices.getCourseInfo, {
@@ -37,4 +37,4 @@ const ClassMenbers: FC = () => {
   )
 }
 
-export default ClassMenbers
+export default ClassMembers
