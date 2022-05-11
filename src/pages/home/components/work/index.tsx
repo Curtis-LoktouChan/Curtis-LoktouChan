@@ -67,7 +67,8 @@ const Work: FC = () => {
           size="small"
           type="link"
           onClick={() => {
-            history.push('./customerWork')
+            // history.push('/customerWork')
+            history.push('/comingSoon')
           }}
         >
           查看更多

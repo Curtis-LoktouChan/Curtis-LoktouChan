@@ -46,7 +46,8 @@ const userCenter: FC = (props) => {
                 icon={<FileWordFilled />}
                 key="myWork"
                 onClick={() => {
-                  history.push('/customerWork')
+                  // history.push('/customerWork')
+                  history.push('/comingSoon')
                 }}
               >
                 我的作品

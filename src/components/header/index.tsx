@@ -72,13 +72,15 @@ const Header: FC = () => {
           <Image src={logo} width={150} preview={false} onClick={() => history.push('/home')} />
         </div>
         <div className={styles.second}>
-          <Button type="link" onClick={() => history.push('/aboutUs')}>
+          {/* <Button type="link" onClick={() => history.push('/aboutUs')}> */}
+          <Button type="link" onClick={() => history.push('/comingSoon')}>
             关于我们
           </Button>
-          <Button type="link" onClick={() => history.push('./courseCenter')}>
+          <Button type="link" onClick={() => history.push('/courseCenter')}>
             课程中心
           </Button>
-          <Button type="link" onClick={() => history.push('./case')}>
+          {/* <Button type="link" onClick={() => history.push('./case')}> */}
+          <Button type="link" onClick={() => history.push('/comingSoon')}>
             案例展示
           </Button>
           <Button type="link" onClick={() => history.push('/softDownload')}>

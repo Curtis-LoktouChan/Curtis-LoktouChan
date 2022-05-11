@@ -53,7 +53,8 @@ const Hardware: FC = () => {
           size="small"
           type="link"
           onClick={() => {
-            history.push('./hardware')
+            // history.push('/hardware')
+            history.push('/comingSoon')
           }}
         >
           查看更多
