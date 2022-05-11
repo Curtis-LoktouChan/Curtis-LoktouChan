@@ -7,6 +7,9 @@ import { UserOutlined } from '@ant-design/icons'
 import styles from './index.less'
 import { UserCenterServices } from '@/services'
 
+const STUDENT = '1'
+const TEACHER = '2'
+
 const ClassMembers: FC = () => {
   const [isSettingPhone, setIsSettingPhone] = useState(false)
   const [isSettingName, setIsSettingName] = useState(false)
@@ -115,7 +118,7 @@ const ClassMembers: FC = () => {
       dataIndex: 'roleId',
       key: 'roleId',
       render: (roleId: string) => {
-        if (roleId === '1') {
+        if (roleId === TEACHER) {
           return <Tag color="purple">教师</Tag>
         } else {
           return <Tag color="blue">学生</Tag>
@@ -152,7 +155,7 @@ const ClassMembers: FC = () => {
       dataIndex: 'action',
       key: 'action',
       render: (_: any, record: any) => {
-        if (record.roleId === '1') {
+        if (record.roleId === STUDENT) {
           return null
         } else {
           return (
