@@ -52,7 +52,7 @@ const myClassList: FC = () => {
         invitePwd: classInfo.invitePwd
       }
     })
-    if (classInfo.selfStudySubject || classInfo.selfStudySubject === '') {
+    if (classInfo.selfStudySubject === '') {
       // 不是自适应学习课程直接进入班级
       history.push('/userCenter/student/enterClass')
     } else {

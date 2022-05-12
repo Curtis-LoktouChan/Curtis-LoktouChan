@@ -21,7 +21,7 @@ export default {
     url: `${PREFIX_URL_V1}selfAdapt/getCourse`
   }),
   // 小节测试
-  unitTest: apiHandle<string, IUnitTestResponse>({
+  unitTest: apiHandle<IGetKnowledgeRequest, IUnitTestResponse>({
     method: 'POST',
     url: `${PREFIX_URL_V1}selfAdapt/getExamByKnowledge`
   }),

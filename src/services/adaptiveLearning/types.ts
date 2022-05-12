@@ -34,7 +34,6 @@ export interface IExamListResponse {
 // 获取知识点请求
 export interface IGetKnowledgeRequest {
   point_name: string
-  start_time: string
 }
 
 // 获取知识点响应

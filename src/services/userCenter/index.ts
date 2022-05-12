@@ -50,8 +50,8 @@ export default {
   }),
   // 获取课程信息
   getCourseInfo: apiHandle<string, CoursesInfo>({
-    method: 'PUT',
-    url: `${PREFIX_URL_V1}teacher/studentList`
+    method: 'GET',
+    url: `${PREFIX_URL_V1}teacher/getCourseMenu`
   }),
   // 学生获取班级列表
   getStudentClassList: apiHandle<null, IGetStudentClassListResponse>({

@@ -13,8 +13,11 @@ import { ACTIONS } from '@/models'
 
 let isUserPass: boolean | null = null // 判断用户是否通过测验
 
+const TEACHER = '2'
+
 const scoreResult: FC = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state: any) => state.user)
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const [isChecked, setIsChecked] = useState(false) // 后台是否检测完成
   const [isPass, setIsPass] = useState(isUserPass) // 是否通过测试
@@ -75,6 +78,12 @@ const scoreResult: FC = () => {
     }
   }
 
+  // 返回个人中心
+  const handleGoBackToUserCenter = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('/userCenter/student/classList')
+  }
+
   return (
     <Layout className={styles.scoreResultOuter}>
       <StepBar currentStep={1} />
@@ -106,9 +115,7 @@ const scoreResult: FC = () => {
               type="primary"
               className={styles.returnToUserCenter}
               size="large"
-              onClick={() => {
-                history.push('./userCenter')
-              }}
+              onClick={handleGoBackToUserCenter}
             >
               返回个人中心
             </Button>

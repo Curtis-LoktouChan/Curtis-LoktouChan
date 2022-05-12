@@ -15,7 +15,7 @@ const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
 
   useEffect(() => {
-    if (!user.isLogin) {
+    if (!user.isLogin && localStorage.getItem('login_token') === '') {
       // 未登录时跳转到登录界面
       history.push('/waitToLogin')
     } else {
@@ -28,7 +28,7 @@ const userCenter: FC = (props) => {
 
   const goMyClassList = () => {
     if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
-    else history.push('userCenter/student/classList')
+    else history.push('/userCenter/student/classList')
   }
 
   return (

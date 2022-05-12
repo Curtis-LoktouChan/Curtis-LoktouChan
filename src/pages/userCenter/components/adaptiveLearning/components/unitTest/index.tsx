@@ -25,7 +25,7 @@ const UnitTest: FC = () => {
   })
 
   useEffect(() => {
-    run(adaptiveLearning.knowledgeName)
+    run({ point_name: adaptiveLearning.knowledgeName })
     const timeInterval = setInterval(() => {
       dispatch({
         type: ACTIONS.adaptiveLearning.presentTime

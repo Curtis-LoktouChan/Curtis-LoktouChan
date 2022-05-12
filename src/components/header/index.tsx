@@ -69,7 +69,7 @@ const Header: FC = () => {
 
   const goUserCenter = () => {
     if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
-    else history.push('./userCenter/student/classList')
+    else history.push('/userCenter/student/classList')
   }
 
   return (
