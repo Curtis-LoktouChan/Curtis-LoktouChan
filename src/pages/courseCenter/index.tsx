@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { ConfigProvider, Layout } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 
@@ -18,10 +18,19 @@ const courseCenter: FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [classID, setClassId] = useState(0)
   const [joinClassForm] = Form.useForm()
+  const [pageNum, setPageNum] = useState(1)
+  const [searchText, setSearchText] = useState('')
+  const pageSize = 10
   //请求数据
   const isLogin = useSelector((state: any) => state.user.isLogin)
+  const { data: courseList, run: getList } = useRequest(courseService.getList, {
+    manual: true
+  })
 
-  const { data: courseList, run: getList } = useRequest(courseService.getList)
+  useEffect(() => {
+    getList({ pageNum, pageSize, searchText })
+  }, [pageNum, searchText])
+
   const { data: joinClassMsg, run: joinClass } = useRequest(courseService.joinClass, {
     manual: true,
     onSuccess: (res) => {
@@ -37,7 +46,7 @@ const courseCenter: FC = () => {
   }
   const handleOk = () => {
     setIsModalVisible(false)
-    //加入班级
+
     try {
       const invitePwd = joinClassForm.getFieldValue('invitePwd')
       joinClass({ classID, invitePwd })
@@ -49,10 +58,6 @@ const courseCenter: FC = () => {
     setIsModalVisible(false)
   }
 
-  //搜索课程
-  const onSearch = (text: string) => {
-    getList({ searchText: text })
-  }
   return (
     <ConfigProvider locale={zhCN}>
       <Layout>
@@ -69,7 +74,7 @@ const courseCenter: FC = () => {
                   extra={
                     <Col>
                       <Input.Search
-                        onSearch={onSearch}
+                        onSearch={(text) => setSearchText(text)}
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="人工智能"
@@ -82,7 +87,10 @@ const courseCenter: FC = () => {
                     itemLayout="vertical"
                     size="small"
                     pagination={{
-                      defaultPageSize: 10,
+                      onChange: (page) => {
+                        setPageNum(page)
+                      },
+                      pageSize: pageSize,
                       total: courseList?.total
                     }}
                     dataSource={courseList?.courseList}
