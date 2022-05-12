@@ -18,7 +18,7 @@ const ClassMembers: FC = () => {
 
   // 组件挂载即请求课程数据
   useEffect(() => {
-    runGetCourses(userCenter.classId)
+    runGetCourses({ classID: userCenter?.classID?.toString() })
   }, [])
 
   return (
@@ -27,7 +27,7 @@ const ClassMembers: FC = () => {
         return (
           <Collapse.Panel header={course.chapterTitle} key={course.ID}>
             <strong>章节概况</strong>
-            {course.Sections.map((section: any) => {
+            {course?.Sections?.map((section: any) => {
               return <div key={section.chapterID}>{section.sectionTitle}</div>
             })}
           </Collapse.Panel>

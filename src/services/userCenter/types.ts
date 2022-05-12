@@ -54,6 +54,10 @@ interface ICourseInfo {
 
 // 获取课程信息响应
 export type CoursesInfo = ICourseInfo[]
+//获取课程信息请求
+export interface CoursesInfoReq {
+  classID: string
+}
 
 // 教师获取班级列表
 export interface ITeacherClassListResponse {

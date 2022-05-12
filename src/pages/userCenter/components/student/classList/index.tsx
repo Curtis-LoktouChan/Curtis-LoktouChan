@@ -92,7 +92,7 @@ const myClassList: FC = () => {
         </Col>
         {studentClassList?.allClassList.map((classInfo, index) => {
           return (
-            <Col key={`${classInfo.ID}${index}`}>
+            <Col key={`${classInfo.ID}${index}`} span={6}>
               <Card
                 hoverable
                 size="small"
