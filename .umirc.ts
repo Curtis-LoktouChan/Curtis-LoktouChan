@@ -98,10 +98,7 @@ export default defineConfig({
       component: '@/pages/register/components/protocol/index',
       exact: true
     },
-    { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
-    { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
-    { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
-    { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true },
+
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
     { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true },
     { path: '/comingSoon', component: '@/pages/developing/index', exact: true }, // 请期待页面

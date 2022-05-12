@@ -68,7 +68,7 @@ const myClassList: FC = () => {
   }
 
   return (
-    <div>
+    <div style={{ padding: '0px 10px' }}>
       <Row gutter={16}>
         <Col span={6}>
           <Card
@@ -87,7 +87,7 @@ const myClassList: FC = () => {
         </Col>
         {classListData?.classList.map((classInfo, index) => {
           return (
-            <Col key={`${classInfo.ID}${index}`}>
+            <Col key={`${classInfo.ID}${index}`} span={6}>
               <Card
                 hoverable
                 size="small"
