@@ -8,7 +8,8 @@ import {
   IUpdateStudentInfo,
   IGetStudentClassListResponse,
   IStudentJoinClass,
-  CoursesInfo
+  CoursesInfo,
+  CoursesInfoReq
 } from './types'
 import { PREFIX_URL_V1 } from '@/constants'
 
@@ -49,9 +50,9 @@ export default {
     url: `${PREFIX_URL_V1}teacher/studentList`
   }),
   // 获取课程信息
-  getCourseInfo: apiHandle<string, CoursesInfo>({
-    method: 'PUT',
-    url: `${PREFIX_URL_V1}teacher/studentList`
+  getCourseInfo: apiHandle<CoursesInfoReq, CoursesInfo>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}teacher/getCourseMenu`
   }),
   // 学生获取班级列表
   getStudentClassList: apiHandle<null, IGetStudentClassListResponse>({

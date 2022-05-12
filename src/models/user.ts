@@ -66,15 +66,10 @@ const userModel: IUserModel = {
       }
     },
     *logoutEffect({ payload, callback }, { call, put }) {
-      const res: IBaseResp = yield call(() => UserServices.logout(null, { noNotification: true }))
-      if (res.code === 200) {
-        callback && callback(res)
-        localStorage.setItem('login_token', '')
-        yield put({
-          type: 'logout',
-          payload: res
-        })
-      }
+      localStorage.setItem('login_token', '')
+      yield put({
+        type: 'logout'
+      })
     }
   },
   reducers: {
