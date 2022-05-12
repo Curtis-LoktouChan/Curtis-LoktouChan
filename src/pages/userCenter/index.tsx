@@ -8,8 +8,8 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import styles from './index.less'
 
-const STUDENT = 1
-const TEACHER = 2
+const STUDENT = '1'
+const TEACHER = '2'
 
 const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
@@ -26,9 +26,14 @@ const userCenter: FC = (props) => {
     }
   }, [])
 
+  const goMyClassList = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('userCenter/student/classList')
+  }
+
   return (
     <Layout>
-      <Layout.Content className={styles.userCenterouter}>
+      <Layout.Content className={styles.userCenterOuter}>
         <Header />
         <Layout style={{ backgroundColor: 'white' }}>
           <Layout.Sider className={styles.userCenterSider} collapsible={true} theme="light">
@@ -38,7 +43,12 @@ const userCenter: FC = (props) => {
               mode="vertical"
               style={{ background: 'white', border: 'none' }}
             >
-              <Menu.Item className={styles.itemSection} icon={<DesktopOutlined />} key="myClass">
+              <Menu.Item
+                className={styles.itemSection}
+                icon={<DesktopOutlined />}
+                key="myClass"
+                onClick={goMyClassList}
+              >
                 我的班级
               </Menu.Item>
               <Menu.Item
@@ -56,7 +66,7 @@ const userCenter: FC = (props) => {
                 className={styles.itemSection}
                 icon={<UserSwitchOutlined />}
                 key="studentIdentity"
-                hidden={user.userInfo?.roleId === TEACHER ? false : true} // 学生身份隐藏该选项
+                hidden={user.userInfo?.roleId === STUDENT ? true : false} // 学生身份隐藏该选项
                 onClick={() => {
                   history.push('/userCenter/student/classList')
                 }}

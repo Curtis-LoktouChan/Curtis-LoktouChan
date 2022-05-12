@@ -6,7 +6,7 @@ import { useSelector } from 'dva'
 
 import styles from './index.less'
 
-const AdaptiveLearing: FC = (props) => {
+const AdaptiveLearning: FC = (props) => {
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const userCenter = useSelector((state: any) => state.userCenter)
 
@@ -35,9 +35,9 @@ const AdaptiveLearing: FC = (props) => {
   )
 
   return (
-    <Layout className={styles.adaptiveLearingOuter}>
+    <Layout className={styles.adaptiveLearningOuter}>
       <PageHeader
-        className={styles.adaptiveLearingPageHeader}
+        className={styles.adaptiveLearningPageHeader}
         tags={tag}
         backIcon={<LeftCircleTwoTone />}
         onBack={() => history.push('/userCenter/myClassList')}
@@ -49,4 +49,4 @@ const AdaptiveLearing: FC = (props) => {
   )
 }
 
-export default AdaptiveLearing
+export default AdaptiveLearning

@@ -4,9 +4,9 @@ export interface IUserLoginRequest {
 }
 
 export interface IUserLoginResponse {
-  login_token: string
+  token: string
   username: string
-  roleId: number
+  roleId: string
 }
 
 export interface IUserRegisterRequest {

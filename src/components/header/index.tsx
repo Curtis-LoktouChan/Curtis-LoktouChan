@@ -8,6 +8,8 @@ import { ACTIONS } from '@/models'
 import styles from './index.less'
 import logo from '@/assets/logo.png'
 
+const TEACHER = '2'
+
 const Header: FC = () => {
   const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
@@ -65,6 +67,11 @@ const Header: FC = () => {
     })
   }, [])
 
+  const goUserCenter = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('./userCenter/student/classList')
+  }
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerInner}>
@@ -86,7 +93,7 @@ const Header: FC = () => {
           <Button type="link" onClick={() => history.push('/softDownload')}>
             下载软件
           </Button>
-          <Button type="link" onClick={() => history.push('/userCenter')}>
+          <Button type="link" onClick={goUserCenter}>
             个人中心
           </Button>
         </div>

@@ -137,6 +137,7 @@ const UnitStudy: FC = () => {
           subTitle={adaptiveLearning.knowledgeName}
         />
         <div dangerouslySetInnerHTML={{ __html: data?.knowledge?.section_info?.content! }}></div>
+        <div style={{ height: '400px' }}></div>
       </Layout>
     </Layout>
   )
