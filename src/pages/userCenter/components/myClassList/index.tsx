@@ -42,7 +42,20 @@ const myClassList: FC = () => {
 
   // 删除班级回调
   const handleDeleteClass = (name: number) => {
-    runDeleteClass({ classID: name })
+    // runDeleteClass({ classID: name })
+    // 先用着，找到其他方法再改
+    fetch(`http://42.192.82.19:50000/api/v1/teacher/class?classID=${name}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('login_token')!
+      }
+    })
+      .then((res) => {
+        setUpdate(update + 1)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   // 进入班级
