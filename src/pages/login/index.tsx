@@ -91,7 +91,7 @@ const Login: FC = () => {
       <div className={styles.register}>
         <p>
           没有账号？
-          <Button type="link" href="./register">
+          <Button type="link" onClick={() => history.push('./register')}>
             现在注册
           </Button>
         </p>

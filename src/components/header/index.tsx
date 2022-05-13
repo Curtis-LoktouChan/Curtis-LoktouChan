@@ -32,13 +32,13 @@ const Header: FC = () => {
   const loggedInMenu = (
     <Menu>
       <Menu.Item key="1">
-        <span style={{ color: 'black' }} onClick={() => history.push('/customerCenter')}>
+        <span style={{ color: 'black' }} onClick={() => history.push('/comingSoon')}>
           我的信息
         </span>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
-        <span style={{ color: 'black' }} onClick={() => history.push('/customerForgotPassword')}>
+        <span style={{ color: 'black' }} onClick={() => history.push('/comingSoon')}>
           修改密码
         </span>
       </Menu.Item>

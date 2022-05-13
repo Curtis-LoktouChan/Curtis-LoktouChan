@@ -8,7 +8,6 @@ import Footer from '@/components/footer'
 import { useRequest } from 'ahooks'
 import { useState } from 'react'
 import { List, Avatar, Row, PageHeader, Button, Input, message, Col, Modal, Form } from 'antd'
-import { LockOutlined } from '@ant-design/icons'
 import { useSelector } from 'dva'
 import { history } from 'umi'
 
@@ -82,7 +81,7 @@ const courseCenter: FC = () => {
                     </Col>
                   }
                 />
-                {isLogin ? (
+                {isLogin || localStorage.getItem('login_token') ? (
                   <List
                     itemLayout="vertical"
                     size="small"
@@ -127,15 +126,7 @@ const courseCenter: FC = () => {
                     )}
                   />
                 ) : (
-                  <div
-                    className={styles.Unlogged}
-                    onClick={() => {
-                      history.push('./login')
-                    }}
-                  >
-                    <LockOutlined />
-                    <span>去登录</span>
-                  </div>
+                  history.push('/waitToLogin')
                 )}
               </Col>
             </Row>

@@ -32,7 +32,7 @@ const waitToLogin: FC = () => {
                   history.push('/login')
                 }}
               >
-                去登陆
+                去登录
               </Button>
             </span>
           }
