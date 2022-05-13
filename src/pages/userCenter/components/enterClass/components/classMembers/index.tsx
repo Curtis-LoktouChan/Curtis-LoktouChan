@@ -15,6 +15,7 @@ const ClassMembers: FC = () => {
   const [isSettingName, setIsSettingName] = useState(false)
   const userCenter = useSelector((state: any) => state.userCenter)
   const [classMembers, setClassMembers] = useState<any>([])
+  const [updateNum, setUpdateNum] = useState<any>(0)
   // 获取班级成员列表数据
   const { data: classMembersData, run: runGetClassMembers } = useRequest(
     UserCenterServices.getClassMembers,
@@ -45,14 +46,14 @@ const ClassMembers: FC = () => {
   const { run: runSetStudentMessage } = useRequest(UserCenterServices.updateStudentInfo, {
     manual: true,
     onSuccess: () => {
-      return
+      setUpdateNum(updateNum + 1)
     }
   })
 
   // 组件挂载即请求获取学生数据
   useEffect(() => {
     runGetClassMembers({ classID: userCenter?.classID?.toString() })
-  }, [])
+  }, [updateNum])
 
   // 撤销选课
   const handleCancelChoosing = (username: string) => {
@@ -100,8 +101,8 @@ const ClassMembers: FC = () => {
               setIsSettingName(false)
               setStudentInfo({
                 username: record.name,
-                telephone: event.target.value.toString(),
-                nickName: record.nickName
+                telephone: record.phoneNumber.toString(),
+                nickName: event.target.value
               })
             }}
           />

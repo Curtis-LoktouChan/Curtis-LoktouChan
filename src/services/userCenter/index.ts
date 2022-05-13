@@ -33,7 +33,7 @@ export default {
   // 教师批量添加学生
   addStudents: apiHandle<IAddStudents, null>({
     method: 'GET',
-    url: `${PREFIX_URL_V1}teacher/addStudentBatch`
+    url: `${PREFIX_URL_V1}teacher/addStudentsBatch`
   }),
   // 教师获取班级成员
   getClassMembers: apiHandle<CoursesInfoReq, IGetClassMembersResponse>({

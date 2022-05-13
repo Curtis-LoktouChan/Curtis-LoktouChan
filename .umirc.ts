@@ -108,6 +108,7 @@ export default defineConfig({
     'process.env': {
       NODE_ENV: 'development',
       BASE_URL: 'http://42.192.82.19:50000/'
+      // BASE_URL: 'http://localhost:5222/'
     }
   },
   dva: {},

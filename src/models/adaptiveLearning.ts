@@ -116,7 +116,7 @@ const adaptiveLearningModel: IUserModel = {
     },
     *setIsFirstTimeEffect({ payload }, { put }) {
       yield put({
-        type: 'setIsLearn',
+        type: 'setIsFirstTime',
         payload
       })
     }
