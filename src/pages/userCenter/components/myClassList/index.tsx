@@ -68,97 +68,100 @@ const myClassList: FC = () => {
   }
 
   return (
-    <div style={{ padding: '0px 10px' }}>
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card
-            hoverable
-            size="small"
-            cover={<img alt="example" src={addClass} />}
-            onClick={() => {
-              history.push('./createClass')
-            }}
-          >
-            <h1 style={{ textAlign: 'center', color: '#1890ff' }}>
-              点击新建班级
-              <PlusOutlined />
-            </h1>
-          </Card>
-        </Col>
-        {classListData?.classList.map((classInfo, index) => {
-          return (
-            <Col key={`${classInfo.ID}${index}`} span={6}>
-              <Card
-                hoverable
-                size="small"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                    onClick={() => {
-                      handleEnterClass(classInfo)
-                    }}
-                  />
-                }
-                key={classInfo.ID}
-                actions={[
-                  <Space
-                    key={`${classInfo.ID}${index}1`}
-                    onClick={() => {
-                      message.info('功能尚未开放')
-                    }}
-                  >
-                    <SettingOutlined />
-                    设置
-                  </Space>,
-                  <Space
-                    key={`${classInfo.ID}${index}2`}
-                    onClick={() => {
-                      handleEnterClass(classInfo)
-                    }}
-                  >
-                    <EyeOutlined />
-                    进入班级
-                  </Space>,
-                  <Popconfirm
-                    key={`${classInfo.ID}${index}3`}
-                    title={`确认删除班级${classInfo.name}吗？`}
-                    onConfirm={() => {
-                      handleDeleteClass(classInfo.name)
-                    }}
-                  >
-                    <DeleteOutlined />
-                    删除班级
-                  </Popconfirm>
-                ]}
-              >
-                <Card.Meta
-                  avatar={
-                    <Avatar
-                      style={{ backgroundColor: '#1296db', verticalAlign: 'middle' }}
-                      size="large"
+    <>
+      <div style={{ padding: '0px 10px' }}>
+        <Row gutter={16}>
+          <Col span={6}>
+            <Card
+              hoverable
+              size="small"
+              cover={<img alt="example" src={addClass} />}
+              onClick={() => {
+                history.push('./createClass')
+              }}
+            >
+              <h1 style={{ textAlign: 'center', color: '#1890ff' }}>
+                点击新建班级
+                <PlusOutlined />
+              </h1>
+            </Card>
+          </Col>
+          {classListData?.classList.map((classInfo, index) => {
+            return (
+              <Col key={`${classInfo.ID}${index}`} span={6}>
+                <Card
+                  hoverable
+                  size="small"
+                  cover={
+                    <img
+                      alt="example"
+                      src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                      onClick={() => {
+                        handleEnterClass(classInfo)
+                      }}
+                    />
+                  }
+                  key={classInfo.ID}
+                  actions={[
+                    <Space
+                      key={`${classInfo.ID}${index}1`}
+                      onClick={() => {
+                        message.info('功能尚未开放')
+                      }}
                     >
-                      {user.userInfo.username}
-                    </Avatar>
-                  }
-                  title={
-                    <span>
-                      {classInfo.name}
-                      {classInfo.selfStudySubject !== '' ? (
-                        <Tag style={{ float: 'right' }} color="blue">
-                          自适应学习
-                        </Tag>
-                      ) : null}
-                    </span>
-                  }
-                  description={classInfo.classBrief}
-                />
-              </Card>
-            </Col>
-          )
-        })}
-      </Row>
-    </div>
+                      <SettingOutlined />
+                      设置
+                    </Space>,
+                    <Space
+                      key={`${classInfo.ID}${index}2`}
+                      onClick={() => {
+                        handleEnterClass(classInfo)
+                      }}
+                    >
+                      <EyeOutlined />
+                      进入班级
+                    </Space>,
+                    <Popconfirm
+                      key={`${classInfo.ID}${index}3`}
+                      title={`确认删除班级${classInfo.name}吗？`}
+                      onConfirm={() => {
+                        handleDeleteClass(classInfo.name)
+                      }}
+                    >
+                      <DeleteOutlined />
+                      删除班级
+                    </Popconfirm>
+                  ]}
+                >
+                  <Card.Meta
+                    avatar={
+                      <Avatar
+                        style={{ backgroundColor: '#1296db', verticalAlign: 'middle' }}
+                        size="large"
+                      >
+                        {user.userInfo?.username}
+                      </Avatar>
+                    }
+                    title={
+                      <span>
+                        {classInfo.name}
+                        {classInfo.selfStudySubject !== '' ? (
+                          <Tag style={{ float: 'right' }} color="blue">
+                            自适应学习
+                          </Tag>
+                        ) : null}
+                      </span>
+                    }
+                    description={classInfo.classBrief}
+                  />
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
+      </div>
+      <div style={{ height: '400px', backgroundColor: 'white' }}></div>
+    </>
   )
 }
 

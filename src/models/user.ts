@@ -80,7 +80,7 @@ const userModel: IUserModel = {
         ...state,
         isLogin: true,
         userInfo: {
-          username: action?.payload?.userInfo?.username,
+          username: action?.payload?.username,
           login_token: action?.payload?.token,
           avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC,
           roleId: action?.payload?.roleId

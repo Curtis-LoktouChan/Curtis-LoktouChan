@@ -49,7 +49,7 @@ interface ICourseInfo {
   chapterTitle: string
   chapterDiscription: string
   classID: number
-  Sections: ISection[]
+  sections: ISection[]
 }
 
 // 获取课程信息响应
@@ -78,9 +78,10 @@ export interface IAddStudents {
 }
 
 // 获取班级成员响应
-export interface IGetClassMembersResponse {
-  classMembers: IClassMember[]
-}
+// export interface IGetClassMembersResponse {
+//   classMembers: IClassMember[]
+// }
+export type IGetClassMembersResponse = IClassMember[]
 
 // 撤销学生选课请求
 export interface IDeleteStudent {

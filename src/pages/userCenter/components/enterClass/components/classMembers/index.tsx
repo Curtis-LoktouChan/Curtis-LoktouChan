@@ -21,7 +21,7 @@ const ClassMembers: FC = () => {
     {
       manual: true,
       onSuccess: () => {
-        const members = classMembersData?.classMembers.map((member, index) => {
+        const members = classMembersData?.map((member: any, index: number) => {
           return {
             memberIndex: index + 1,
             name: member.username,
@@ -51,7 +51,7 @@ const ClassMembers: FC = () => {
 
   // 组件挂载即请求获取学生数据
   useEffect(() => {
-    runGetClassMembers(userCenter.classId)
+    runGetClassMembers({ classID: userCenter?.classID?.toString() })
   }, [])
 
   // 撤销选课
@@ -155,7 +155,7 @@ const ClassMembers: FC = () => {
       dataIndex: 'action',
       key: 'action',
       render: (_: any, record: any) => {
-        if (record.roleId === STUDENT) {
+        if (record.roleId === TEACHER) {
           return null
         } else {
           return (

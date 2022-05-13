@@ -50,6 +50,7 @@ const enterClass: FC = (props) => {
   // 确认添加章节, 接口？
   const handleAddChapterOK = () => {
     setIsAddChapterModalVisible(false)
+    message.info('正在完善中')
     // const chapterTitle = chapterForm.getFieldValue('chapterTitle')  // 章节名
     // const chapterDiscrption = chapterForm.getFieldValue('chapterDiscrption')  // 章节描述
   }
@@ -140,6 +141,7 @@ const enterClass: FC = (props) => {
         </Layout.Sider>
         {props.children}
       </Layout>
+      <div style={{ height: '300px', backgroundColor: 'white' }}></div>
       <Modal
         title="添加学员"
         visible={isAddStudentsModalVisible}
@@ -158,7 +160,7 @@ const enterClass: FC = (props) => {
           ref={addStudentRef}
         />
         位学员
-        <p>（一个班级最多99个学生。)</p>
+        <p>（一个班级最多99个学生。）</p>
       </Modal>
       <Modal
         title="新建章节"
@@ -181,6 +183,7 @@ const enterClass: FC = (props) => {
           </Form.Item>
         </Form>
       </Modal>
+      <div style={{ height: '400px', backgroundColor: 'white' }}></div>
     </Layout>
   )
 }

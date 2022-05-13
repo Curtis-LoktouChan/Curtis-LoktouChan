@@ -73,99 +73,102 @@ const myClassList: FC = () => {
   }
 
   return (
-    <div className={styles.myClassListContainer}>
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card
-            hoverable
-            size="small"
-            cover={<img alt="example" src={addClass} />}
-            onClick={() => {
-              setJoinClassModalVisible(true)
-            }}
-          >
-            <h1 style={{ textAlign: 'center', color: '#1890ff' }}>
-              加入班级
-              <PlusOutlined />
-            </h1>
-          </Card>
-        </Col>
-        {studentClassList?.allClassList.map((classInfo, index) => {
-          return (
-            <Col key={`${classInfo.ID}${index}`} span={6}>
-              <Card
-                hoverable
-                size="small"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                onClick={() => {
-                  handleEnterClass(classInfo)
-                }}
-                key={classInfo.ID}
-                actions={[
-                  <Space
-                    onClick={() => {
-                      handleEnterClass(classInfo)
-                    }}
-                  >
-                    <EyeOutlined />
-                    进入班级
-                  </Space>
-                ]}
-              >
-                <Card.Meta
-                  avatar={
-                    <Avatar
-                      style={{ backgroundColor: '#1296db', verticalAlign: 'middle' }}
-                      size="large"
+    <>
+      <div className={styles.myClassListContainer}>
+        <Row gutter={16}>
+          <Col span={6}>
+            <Card
+              hoverable
+              size="small"
+              cover={<img alt="example" src={addClass} />}
+              onClick={() => {
+                setJoinClassModalVisible(true)
+              }}
+            >
+              <h1 style={{ textAlign: 'center', color: '#1890ff' }}>
+                加入班级
+                <PlusOutlined />
+              </h1>
+            </Card>
+          </Col>
+          {studentClassList?.allClassList.map((classInfo, index) => {
+            return (
+              <Col key={`${classInfo.ID}${index}`} span={6}>
+                <Card
+                  hoverable
+                  size="small"
+                  cover={
+                    <img
+                      alt="example"
+                      src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    />
+                  }
+                  onClick={() => {
+                    handleEnterClass(classInfo)
+                  }}
+                  key={classInfo.ID}
+                  actions={[
+                    <Space
+                      onClick={() => {
+                        handleEnterClass(classInfo)
+                      }}
                     >
-                      {user?.userInfo?.username}
-                    </Avatar>
-                  }
-                  title={
-                    <span>
-                      {classInfo.name}
-                      {classInfo.selfStudySubject !== '' ? (
-                        <Tag style={{ float: 'right' }} color="blue">
-                          自适应学习
-                        </Tag>
-                      ) : null}
-                    </span>
-                  }
-                  description={classInfo.classBrief}
-                />
-              </Card>
-            </Col>
-          )
-        })}
-      </Row>
-      <Modal
-        title="请输入班级ID和邀请码（如不需要邀请码可以不输入）"
-        centered
-        visible={joinClassModalVisible}
-        onOk={handleJoinClass}
-        onCancel={() => setJoinClassModalVisible(false)}
-        okText="加入"
-        cancelText="取消"
-      >
-        <Form layout="vertical" form={joinClass}>
-          <Form.Item
-            label="班级ID"
-            name="className"
-            rules={[{ required: true, message: '输入班级ID' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label="邀请码" name="invitePwd" initialValue="">
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>
+                      <EyeOutlined />
+                      进入班级
+                    </Space>
+                  ]}
+                >
+                  <Card.Meta
+                    avatar={
+                      <Avatar
+                        style={{ backgroundColor: '#1296db', verticalAlign: 'middle' }}
+                        size="large"
+                      >
+                        {user.userInfo?.username}
+                      </Avatar>
+                    }
+                    title={
+                      <span>
+                        {classInfo.name}
+                        {classInfo.selfStudySubject !== '' ? (
+                          <Tag style={{ float: 'right' }} color="blue">
+                            自适应学习
+                          </Tag>
+                        ) : null}
+                      </span>
+                    }
+                    description={classInfo.classBrief}
+                  />
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
+        <Modal
+          title="请输入班级ID和邀请码（如不需要邀请码可以不输入）"
+          centered
+          visible={joinClassModalVisible}
+          onOk={handleJoinClass}
+          onCancel={() => setJoinClassModalVisible(false)}
+          okText="加入"
+          cancelText="取消"
+        >
+          <Form layout="vertical" form={joinClass}>
+            <Form.Item
+              label="班级ID"
+              name="className"
+              rules={[{ required: true, message: '输入班级ID' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="邀请码" name="invitePwd" initialValue="">
+              <Input />
+            </Form.Item>
+          </Form>
+        </Modal>
+      </div>
+      <div style={{ height: '400px', backgroundColor: 'white' }}></div>
+    </>
   )
 }
 

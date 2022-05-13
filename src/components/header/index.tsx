@@ -109,12 +109,14 @@ const Header: FC = () => {
               <span className={styles.username}>
                 {user?.isLogin ? user?.userInfo?.username : '未登录'}
               </span>
-              <Avatar
-                shape="circle"
-                size="small"
-                src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
-                icon={<UserOutlined />}
-              />
+              {
+                <Avatar
+                  shape="circle"
+                  size="small"
+                  src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
+                  icon={<UserOutlined />}
+                />
+              }
             </div>
           </Dropdown>
         </div>

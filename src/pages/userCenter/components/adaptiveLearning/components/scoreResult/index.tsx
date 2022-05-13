@@ -139,6 +139,7 @@ const scoreResult: FC = () => {
           <Spin className={styles.waitingCheckIcon} indicator={<LoadingOutlined />} />
         </div>
       )}
+      <div style={{ height: '400px', background: 'white' }}></div>
     </Layout>
   )
 }

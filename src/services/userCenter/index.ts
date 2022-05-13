@@ -35,7 +35,7 @@ export default {
     url: `${PREFIX_URL_V1}teacher/addStudentBatch`
   }),
   // 教师获取班级成员
-  getClassMembers: apiHandle<string, IGetClassMembersResponse>({
+  getClassMembers: apiHandle<CoursesInfoReq, IGetClassMembersResponse>({
     method: 'GET',
     url: `${PREFIX_URL_V1}teacher/studentList`
   }),
@@ -58,6 +58,11 @@ export default {
   getStudentClassList: apiHandle<null, IGetStudentClassListResponse>({
     method: 'GET',
     url: `${PREFIX_URL_V1}student/class`
+  }),
+  // 学生获取课程信息
+  getStudentCourseInfo: apiHandle<CoursesInfoReq, CoursesInfo>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}student/getCourseMenu`
   }),
   // 学生加入班级
   studentJoinClass: apiHandle<IStudentJoinClass, null>({
