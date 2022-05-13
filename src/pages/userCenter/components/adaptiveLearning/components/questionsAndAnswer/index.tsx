@@ -77,11 +77,11 @@ const QuestionsAndAnswers: FC<PropsType> = (props: PropsType) => {
                     <Space direction="vertical">
                       {selectItemOrders.map((item) => {
                         // 返回本题的每一个选项
-                        return (
+                        return selectItems[item] !== '' ? (
                           <Radio key={item} value={item}>
                             {item.toUpperCase() + ':  ' + selectItems[item]}
                           </Radio>
-                        )
+                        ) : null
                       })}
                     </Space>
                   </Radio.Group>

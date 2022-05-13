@@ -41,8 +41,8 @@ const myClassList: FC = () => {
   }, [update])
 
   // 删除班级回调
-  const handleDeleteClass = (name: string) => {
-    runDeleteClass(name)
+  const handleDeleteClass = (name: number) => {
+    runDeleteClass({ classID: name })
   }
 
   // 进入班级
@@ -125,7 +125,7 @@ const myClassList: FC = () => {
                       key={`${classInfo.ID}${index}3`}
                       title={`确认删除班级${classInfo.name}吗？`}
                       onConfirm={() => {
-                        handleDeleteClass(classInfo.name)
+                        handleDeleteClass(classInfo.ID)
                       }}
                     >
                       <DeleteOutlined />

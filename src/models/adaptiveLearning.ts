@@ -2,11 +2,14 @@ import { Effect, Reducer } from 'umi'
 import { ISubmitAnswer, IKnowledgeList, IExamList } from '@/services/adaptiveLearning/types'
 
 interface IAdaptiveLearningModelState {
+  isFirstTime: boolean
   isLearn: boolean
   isFinish: boolean
   isTesting: boolean
   presentTime: number | null
   startTime: number | null
+  isReview: boolean
+  submitTime: number | null
   answerList: ISubmitAnswer[]
   knowledgeList: IKnowledgeList[]
   examList: IExamList[]
@@ -23,6 +26,9 @@ interface IUserModel {
     setAnswerListEffect: Effect
     setKnowledgeNameEffect: Effect
     setStartTimeEffect: Effect
+    setReviewStateEffect: Effect
+    setSubmitTimeEffect: Effect
+    setIsFirstTimeEffect: Effect
   }
   reducers: {
     setIsTesting: Reducer<IAdaptiveLearningModelState>
@@ -32,17 +38,23 @@ interface IUserModel {
     setAnswerList: Reducer<IAdaptiveLearningModelState>
     setKnowledgeName: Reducer<IAdaptiveLearningModelState>
     setStartTime: Reducer<IAdaptiveLearningModelState>
+    setReviewState: Reducer<IAdaptiveLearningModelState>
+    setSubmitTime: Reducer<IAdaptiveLearningModelState>
+    setIsFirstTime: Reducer<IAdaptiveLearningModelState>
   }
 }
 
 const adaptiveLearningModel: IUserModel = {
   namespace: 'adaptiveLearning',
   state: {
+    isFirstTime: false,
     isLearn: false,
     isFinish: false,
     presentTime: null,
     isTesting: false,
     startTime: null,
+    isReview: false,
+    submitTime: null,
     examList: [],
     answerList: [],
     knowledgeList: []
@@ -89,6 +101,24 @@ const adaptiveLearningModel: IUserModel = {
         type: 'setStartTime',
         payload
       })
+    },
+    *setReviewStateEffect({ payload }, { put }) {
+      yield put({
+        type: 'setReviewState',
+        payload
+      })
+    },
+    *setSubmitTimeEffect({ payload }, { put }) {
+      yield put({
+        type: 'setSubmitTime',
+        payload
+      })
+    },
+    *setIsFirstTimeEffect({ payload }, { put }) {
+      yield put({
+        type: 'setIsLearn',
+        payload
+      })
     }
   },
   reducers: {
@@ -133,6 +163,24 @@ const adaptiveLearningModel: IUserModel = {
       return {
         ...state!,
         startTime: payload.startTime
+      }
+    },
+    setReviewState(state, { payload }) {
+      return {
+        ...state!,
+        isReview: payload?.isReview
+      }
+    },
+    setSubmitTime(state, { payload }) {
+      return {
+        ...state!,
+        submitTime: payload.submitTime
+      }
+    },
+    setIsFirstTime(state, { payload }) {
+      return {
+        ...state!,
+        isFirstTime: payload.isFirstTime
       }
     }
   }

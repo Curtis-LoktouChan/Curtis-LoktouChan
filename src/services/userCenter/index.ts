@@ -9,7 +9,8 @@ import {
   IGetStudentClassListResponse,
   IStudentJoinClass,
   CoursesInfo,
-  CoursesInfoReq
+  CoursesInfoReq,
+  ITeacherDeleteClassReq
 } from './types'
 import { PREFIX_URL_V1 } from '@/constants'
 
@@ -20,7 +21,7 @@ export default {
     url: `${PREFIX_URL_V1}teacher/class`
   }),
   // 教师删除班级
-  deleteClass: apiHandle<string, null>({
+  deleteClass: apiHandle<ITeacherDeleteClassReq, null>({
     method: 'DELETE',
     url: `${PREFIX_URL_V1}teacher/class`
   }),

@@ -1,10 +1,11 @@
 import { history } from 'umi'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Layout, PageHeader } from 'antd'
 import { LeftCircleTwoTone } from '@ant-design/icons'
-import { useSelector } from 'dva'
+import { useSelector, useDispatch } from 'dva'
 
 import styles from './index.less'
+import { ACTIONS } from '@/models'
 
 const TEACHER = '2'
 
@@ -12,9 +13,19 @@ const AdaptiveLearning: FC = (props) => {
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const userCenter = useSelector((state: any) => state.userCenter)
   const user = useSelector((state: any) => state.user)
+  const dispatch = useDispatch()
 
   const myClassName = `${userCenter.className}`
   const myClassInfo = `班级ID：${userCenter.classID} 邀请码：${userCenter.invitePwd}`
+
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setReviewState,
+        payload: { isReview: false }
+      })
+    }
+  }, [])
 
   const useTime = () => {
     const startTime = adaptiveLearning.startTime

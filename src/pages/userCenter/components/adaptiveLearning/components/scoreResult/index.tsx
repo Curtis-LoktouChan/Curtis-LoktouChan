@@ -30,9 +30,14 @@ const scoreResult: FC = () => {
         payload: { answerList: [] }
       })
       setIsChecked(true)
-      if (data!.isFinish) {
+      if (data?.isFinish) history.push('./finishAll') // 完成所有题目，跳转到已完成
+      if (data!.accuracy === 1 || adaptiveLearning.isFirstTime) {
         setIsPass(true)
-        data?.knowledge_list.length === 0 && history.push('./finishAll') // 不存在题目，表示已完成
+        // 更新学习状态
+        dispatch({
+          type: ACTIONS.adaptiveLearning.setReviewState,
+          payload: { isReview: false }
+        })
         // 更新知识点信息
         dispatch({
           type: ACTIONS.adaptiveLearning.setKnowledgeList,
@@ -46,6 +51,10 @@ const scoreResult: FC = () => {
 
   // 组件挂载即发送请求提交答案
   useEffect(() => {
+    dispatch({
+      type: ACTIONS.adaptiveLearning.setReviewState,
+      payload: { isReview: false }
+    })
     if (adaptiveLearning.answerList.length !== 0) {
       const startTime = adaptiveLearning.startTime
       const endTime = new Date().getTime()
@@ -72,6 +81,10 @@ const scoreResult: FC = () => {
   // 重新测验的回调
   const handleRetry = () => {
     if (adaptiveLearning.isLearn) {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setReviewState,
+        payload: { isReview: true }
+      })
       history.push('./unitStudy')
     } else {
       history.push('./firstTimeStudy')

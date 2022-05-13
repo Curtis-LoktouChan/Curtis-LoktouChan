@@ -19,10 +19,19 @@ const UnitStudy: FC = () => {
   })
 
   useEffect(() => {
-    dispatch({
-      type: ACTIONS.adaptiveLearning.setStartTime,
-      payload: { startTime: new Date().getTime() }
-    })
+    if (!adaptiveLearning?.isReview) {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setStartTime,
+        payload: { startTime: new Date().getTime() }
+      })
+    } else {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setStartTime,
+        payload: {
+          startTime: new Date().getTime() - adaptiveLearning.submitTime + adaptiveLearning.startTime
+        }
+      })
+    }
     run({ point_name: adaptiveLearning.knowledgeName })
     const timeInterval = setInterval(() => {
       dispatch({

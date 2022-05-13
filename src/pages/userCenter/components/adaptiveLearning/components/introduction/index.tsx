@@ -1,5 +1,5 @@
 import { history } from 'umi'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Result } from 'antd'
 import { FundTwoTone } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
@@ -37,6 +37,13 @@ const Introduction: FC = () => {
       }
     }
   })
+
+  useEffect(() => {
+    dispatch({
+      type: ACTIONS.adaptiveLearning.setReviewState,
+      payload: { isReview: false }
+    })
+  }, [])
 
   const handleStartLearning = () => {
     run(loginToken as string)

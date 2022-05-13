@@ -59,6 +59,11 @@ export interface CoursesInfoReq {
   classID: string
 }
 
+// 教师删除班级
+export interface ITeacherDeleteClassReq {
+  classID: number
+}
+
 // 教师获取班级列表
 export interface ITeacherClassListResponse {
   classList: ITeacherClassList[]
@@ -69,6 +74,7 @@ export interface ICreateClass {
   name: string
   invitePwd: string | undefined
   classBrief: string
+  selfStudySubject?: string
 }
 
 // 批量添加学生

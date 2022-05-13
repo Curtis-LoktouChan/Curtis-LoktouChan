@@ -12,7 +12,7 @@ interface IcourseCenterShowData {
   created_at: string
 }
 
-export interface IcourseCenterResponse {
+export interface IourseCenterResponse {
   courseList: IcourseCenterShowData[]
   total: number
 }

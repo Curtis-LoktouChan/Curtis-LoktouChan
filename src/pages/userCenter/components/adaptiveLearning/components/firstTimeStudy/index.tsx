@@ -34,6 +34,10 @@ const FirstTimeStudy: FC = () => {
         type: ACTIONS.adaptiveLearning.setAnswerList,
         payload: { answerList }
       })
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setIsFirstTime,
+        payload: { isFirstTime: true }
+      })
       history.push('./scoreResult')
     } else {
       message.info('您有未完成的测试题！')

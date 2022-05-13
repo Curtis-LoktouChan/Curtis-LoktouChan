@@ -25,7 +25,6 @@ const UnitTest: FC = () => {
   })
 
   useEffect(() => {
-    console.log('知识点名称', adaptiveLearning.knowledgeName)
     run({ point_name: adaptiveLearning.knowledgeName })
     const timeInterval = setInterval(() => {
       dispatch({
@@ -55,6 +54,14 @@ const UnitTest: FC = () => {
       dispatch({
         type: ACTIONS.adaptiveLearning.setAnswerList,
         payload: { answerList }
+      })
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setSubmitTime,
+        payload: { submitTime: new Date().getTime() }
+      })
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setIsFirstTime,
+        payload: { isFirstTime: false }
       })
       history.push('./scoreResult')
     } else {
