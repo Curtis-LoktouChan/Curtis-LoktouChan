@@ -18,17 +18,6 @@ const UnitStudy: FC = () => {
     onSuccess: () => {}
   })
 
-  // 时间格式
-  // const formatTime = () => {
-  //   const date = new Date()
-  //   const Y = date.getFullYear()
-  //   const M = date.getMonth() + 1
-  //   const D = date.getDate()
-  //   const H = date.getHours()
-  //   const Min = date.getMinutes()
-  //   return Y + '-' + M + '-' + D + ' ' + H + ':' + Min
-  // }
-
   useEffect(() => {
     dispatch({
       type: ACTIONS.adaptiveLearning.setStartTime,

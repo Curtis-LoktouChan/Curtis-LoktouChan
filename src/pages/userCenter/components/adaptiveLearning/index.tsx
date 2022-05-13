@@ -6,9 +6,12 @@ import { useSelector } from 'dva'
 
 import styles from './index.less'
 
+const TEACHER = '2'
+
 const AdaptiveLearning: FC = (props) => {
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const userCenter = useSelector((state: any) => state.userCenter)
+  const user = useSelector((state: any) => state.user)
 
   const myClassName = `${userCenter.className}`
   const myClassInfo = `班级ID：${userCenter.classID} 邀请码：${userCenter.invitePwd}`
@@ -34,13 +37,18 @@ const AdaptiveLearning: FC = (props) => {
     <></>
   )
 
+  const handleGoBack = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('/userCenter/student/classList')
+  }
+
   return (
     <Layout className={styles.adaptiveLearningOuter}>
       <PageHeader
         className={styles.adaptiveLearningPageHeader}
         tags={tag}
         backIcon={<LeftCircleTwoTone />}
-        onBack={() => history.push('/userCenter/myClassList')}
+        onBack={handleGoBack}
         title={myClassName}
         subTitle={myClassInfo}
       />

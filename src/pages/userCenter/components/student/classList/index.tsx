@@ -123,7 +123,7 @@ const myClassList: FC = () => {
                       style={{ backgroundColor: '#1296db', verticalAlign: 'middle' }}
                       size="large"
                     >
-                      {user.userInfo.username}
+                      {user?.userInfo?.username}
                     </Avatar>
                   }
                   title={

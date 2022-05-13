@@ -4,7 +4,7 @@ export interface IUserLoginRequest {
 }
 
 export interface IUserLoginResponse {
-  token: string
+  token?: string
   username: string
   roleId: string
 }

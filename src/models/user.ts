@@ -3,6 +3,7 @@ import { UserServices } from '@/services'
 import { IBaseResp } from '@/utils/types'
 import { IUserLoginResponse } from '@/services/user/types'
 import { BASE_AVATAR_SRC } from '@/constants'
+import { history } from 'umi'
 
 export interface IUserModelState {
   isLogin: boolean
@@ -57,7 +58,7 @@ const userModel: IUserModel = {
         callback && callback(res)
         yield put({
           type: 'login',
-          payload: res
+          payload: res.data
         })
       } else {
         yield put({
@@ -67,6 +68,7 @@ const userModel: IUserModel = {
     },
     *logoutEffect({ payload, callback }, { call, put }) {
       localStorage.setItem('login_token', '')
+      history.push('/home')
       yield put({
         type: 'logout'
       })
