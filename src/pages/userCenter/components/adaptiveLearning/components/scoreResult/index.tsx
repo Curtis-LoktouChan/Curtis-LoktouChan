@@ -59,7 +59,7 @@ const scoreResult: FC = () => {
       const startTime = adaptiveLearning.startTime
       const endTime = new Date().getTime()
       const useTime = (endTime - startTime) / 1000
-      run({ time_used: useTime, answer: adaptiveLearning.answerList })
+      run({ time_used: Math.round(useTime), answer: adaptiveLearning.answerList })
     } else {
       // 答案不存在，即点击开始学习时非首次学习
       setIsChecked(true)
