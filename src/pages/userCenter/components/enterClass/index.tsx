@@ -62,7 +62,9 @@ const enterClass: FC = (props) => {
         backIcon={<LeftCircleTwoTone />}
         onBack={() => history.goBack()}
         title={userCenter.className}
-        subTitle={`班级ID: ${userCenter.classID} 邀请码: ${userCenter.invitePwd}`}
+        subTitle={`班级ID: ${userCenter.classID} 邀请码: ${
+          userCenter.invitePwd ? userCenter.invitePwd : '无'
+        }`}
         extra={[
           <Button
             shape="round"

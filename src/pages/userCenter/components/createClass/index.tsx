@@ -140,7 +140,7 @@ const createClass: FC = () => {
           ]}
         >
           <Select>
-            <Select.Option value="小学数学">小学数学</Select.Option>
+            <Select.Option value="初识神经网络">初识神经网络</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 4 }}>

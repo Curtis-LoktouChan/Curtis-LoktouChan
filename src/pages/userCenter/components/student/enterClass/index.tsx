@@ -35,7 +35,9 @@ const enterClass: FC = () => {
         backIcon={<LeftCircleTwoTone />}
         onBack={() => history.goBack()}
         title={userCenter.className}
-        subTitle={`班级ID: ${userCenter.classID} 邀请码: ${userCenter.invitePwd}`}
+        subTitle={`班级ID: ${userCenter.classID} 邀请码: ${
+          userCenter.invitePwd ? userCenter.invitePwd : '无'
+        }`}
       >
         <Descriptions size="small">
           <Descriptions.Item label="班级简介">{userCenter.classBrief}</Descriptions.Item>

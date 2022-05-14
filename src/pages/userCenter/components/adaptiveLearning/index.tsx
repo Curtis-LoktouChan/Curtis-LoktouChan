@@ -16,7 +16,9 @@ const AdaptiveLearning: FC = (props) => {
   const dispatch = useDispatch()
 
   const myClassName = `${userCenter.className}`
-  const myClassInfo = `班级ID：${userCenter.classID} 邀请码：${userCenter.invitePwd}`
+  const myClassInfo = `班级ID: ${userCenter.classID} 邀请码: ${
+    userCenter.invitePwd ? userCenter.invitePwd : '无'
+  }`
 
   useEffect(() => {
     return () => {
