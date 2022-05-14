@@ -15,7 +15,6 @@ const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
 
   useEffect(() => {
-    console.log('一次尝试', localStorage.getItem('login_token'))
     if (!localStorage.getItem('login_token')) {
       history.push('/waitToLogin')
     } else if (!user.isLogin && localStorage.getItem('login_token') === '') {
