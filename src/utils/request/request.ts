@@ -52,8 +52,8 @@ const errorHandler = (error: ResponseError<IErrorData>): any | void => {
 const request = extend({
   prefix: BASE_URL,
   timeout: 50000,
-  errorHandler,
-  credentials: 'include'
+  errorHandler
+  // credentials: 'include'
 })
 
 request.interceptors.request.use((url, options: RequestOptionsInit) => {

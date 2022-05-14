@@ -3,6 +3,7 @@ import { UserServices } from '@/services'
 import { IBaseResp } from '@/utils/types'
 import { IUserLoginResponse } from '@/services/user/types'
 import { BASE_AVATAR_SRC } from '@/constants'
+import { history } from 'umi'
 
 export interface IUserModelState {
   isLogin: boolean
@@ -10,7 +11,7 @@ export interface IUserModelState {
     username: string
     login_token: string
     avatarSrc?: string
-    roleId: number
+    roleId: string
   } | null
 }
 
@@ -57,7 +58,7 @@ const userModel: IUserModel = {
         callback && callback(res)
         yield put({
           type: 'login',
-          payload: res
+          payload: res.data
         })
       } else {
         yield put({
@@ -66,15 +67,11 @@ const userModel: IUserModel = {
       }
     },
     *logoutEffect({ payload, callback }, { call, put }) {
-      const res: IBaseResp = yield call(() => UserServices.logout(null, { noNotification: true }))
-      if (res.code === 200) {
-        callback && callback(res)
-        localStorage.setItem('login_token', '')
-        yield put({
-          type: 'logout',
-          payload: res
-        })
-      }
+      localStorage.setItem('login_token', '')
+      history.push('/home')
+      yield put({
+        type: 'logout'
+      })
     }
   },
   reducers: {
@@ -83,8 +80,8 @@ const userModel: IUserModel = {
         ...state,
         isLogin: true,
         userInfo: {
-          username: action?.payload?.userInfo?.username,
-          login_token: action?.payload?.login_token,
+          username: action?.payload?.username,
+          login_token: action?.payload?.token,
           avatarSrc: action?.payload?.userInfo?.avatarSrc || BASE_AVATAR_SRC,
           roleId: action?.payload?.roleId
         }

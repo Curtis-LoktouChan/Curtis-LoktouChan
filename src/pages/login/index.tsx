@@ -19,7 +19,7 @@ const Login: FC = () => {
         type: ACTIONS.user.login,
         payload: { username: values?.username, password: values?.password },
         callback: (data: IUserLoginResponse) => {
-          localStorage.setItem('login_token', data?.login_token)
+          localStorage.setItem('login_token', data?.token)
           history.push('./home')
         }
       })
@@ -91,7 +91,7 @@ const Login: FC = () => {
       <div className={styles.register}>
         <p>
           没有账号？
-          <Button type="link" href="./register">
+          <Button type="link" onClick={() => history.push('./register')}>
             现在注册
           </Button>
         </p>

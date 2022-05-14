@@ -13,8 +13,11 @@ import { ACTIONS } from '@/models'
 
 let isUserPass: boolean | null = null // 判断用户是否通过测验
 
+const TEACHER = '2'
+
 const scoreResult: FC = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state: any) => state.user)
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const [isChecked, setIsChecked] = useState(false) // 后台是否检测完成
   const [isPass, setIsPass] = useState(isUserPass) // 是否通过测试
@@ -27,9 +30,14 @@ const scoreResult: FC = () => {
         payload: { answerList: [] }
       })
       setIsChecked(true)
-      if (data!.isFinish) {
+      if (data?.isFinish) history.push('./finishAll') // 完成所有题目，跳转到已完成
+      if (data!.accuracy === 1 || adaptiveLearning.isFirstTime) {
         setIsPass(true)
-        data?.knowledge_list.length === 0 && history.push('./finishAll') // 不存在题目，表示已完成
+        // 更新学习状态
+        dispatch({
+          type: ACTIONS.adaptiveLearning.setReviewState,
+          payload: { isReview: false }
+        })
         // 更新知识点信息
         dispatch({
           type: ACTIONS.adaptiveLearning.setKnowledgeList,
@@ -43,11 +51,15 @@ const scoreResult: FC = () => {
 
   // 组件挂载即发送请求提交答案
   useEffect(() => {
+    dispatch({
+      type: ACTIONS.adaptiveLearning.setReviewState,
+      payload: { isReview: false }
+    })
     if (adaptiveLearning.answerList.length !== 0) {
       const startTime = adaptiveLearning.startTime
       const endTime = new Date().getTime()
-      const useTime = endTime - startTime
-      run({ time_used: useTime, answer: adaptiveLearning.answerList })
+      const useTime = (endTime - startTime) / 1000
+      run({ time_used: Math.round(useTime), answer: adaptiveLearning.answerList })
     } else {
       // 答案不存在，即点击开始学习时非首次学习
       setIsChecked(true)
@@ -69,10 +81,20 @@ const scoreResult: FC = () => {
   // 重新测验的回调
   const handleRetry = () => {
     if (adaptiveLearning.isLearn) {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setReviewState,
+        payload: { isReview: true }
+      })
       history.push('./unitStudy')
     } else {
       history.push('./firstTimeStudy')
     }
+  }
+
+  // 返回个人中心
+  const handleGoBackToUserCenter = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('/userCenter/student/classList')
   }
 
   return (
@@ -106,9 +128,7 @@ const scoreResult: FC = () => {
               type="primary"
               className={styles.returnToUserCenter}
               size="large"
-              onClick={() => {
-                history.push('./userCenter')
-              }}
+              onClick={handleGoBackToUserCenter}
             >
               返回个人中心
             </Button>
@@ -132,6 +152,7 @@ const scoreResult: FC = () => {
           <Spin className={styles.waitingCheckIcon} indicator={<LoadingOutlined />} />
         </div>
       )}
+      <div style={{ height: '400px', background: 'white' }}></div>
     </Layout>
   )
 }

@@ -1,5 +1,5 @@
 import { history } from 'umi'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Upload, Button, Card } from 'antd'
 import { UploadOutlined, FileTextTwoTone, LockOutlined } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
@@ -14,9 +14,14 @@ const { Meta } = Card
 const Work: FC = () => {
   const user = useSelector((state: any) => state.user) // 用户信息
 
-  const { data: works } = useRequest(WorkServices.getWorks, {
+  const { data: works, run } = useRequest(WorkServices.getWorks, {
+    manual: true,
     defaultParams: [null, { noNotification: true }]
   })
+
+  useEffect(() => {
+    if (user.isLogin) run()
+  }, [])
 
   const whetherToRender = () => {
     return user?.isLogin ? (
@@ -67,7 +72,8 @@ const Work: FC = () => {
           size="small"
           type="link"
           onClick={() => {
-            history.push('./customerWork')
+            // history.push('/customerWork')
+            history.push('/comingSoon')
           }}
         >
           查看更多

@@ -4,7 +4,7 @@ import { Image, Button } from 'antd'
 
 import styles from './index.less'
 import logo from '@/assets/logo.png'
-import qrCode from './qrCode.jpg'
+import qrCode from '@/assets/qrCode.jpg'
 
 const Footer: FC = () => {
   return (
@@ -16,13 +16,48 @@ const Footer: FC = () => {
           </div>
           <div className={styles.footerHeaderLink}>
             <div>
-              <Button type="link">报个bug</Button>
-              <Button type="link">常见问题</Button>
-              <Button type="link">商务合作</Button>
+              <Button
+                type="link"
+                onClick={() => {
+                  history.push('/comingSoon')
+                }}
+              >
+                报个bug
+              </Button>
+              <Button
+                type="link"
+                onClick={() => {
+                  history.push('/comingSoon')
+                }}
+              >
+                常见问题
+              </Button>
+              <Button
+                type="link"
+                onClick={() => {
+                  history.push('/connectUs')
+                }}
+              >
+                商务合作
+              </Button>
             </div>
             <div>
-              <Button type="link">关于我们</Button>
-              <Button type="link">联系我们</Button>
+              <Button
+                type="link"
+                onClick={() => {
+                  history.push('/comingSoon')
+                }}
+              >
+                关于我们
+              </Button>
+              <Button
+                type="link"
+                onClick={() => {
+                  history.push('/connectUs')
+                }}
+              >
+                联系我们
+              </Button>
               <Button type="text">微信公众号</Button>
             </div>
           </div>

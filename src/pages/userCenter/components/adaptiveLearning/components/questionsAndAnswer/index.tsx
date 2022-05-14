@@ -20,7 +20,7 @@ const QuestionsAndAnswers: FC<PropsType> = (props: PropsType) => {
   // 生成未填写的答案列表
   useEffect(() => {
     answers = [] // 清空上一次的答案，为什么组件销毁了answers列表数据没有删除？
-    questionList.map((question: IExamList) => {
+    questionList?.map((question: IExamList) => {
       const answer = { exam_id: question.id, my_answer: '', self_study_class_id: 73 }
       answers.push(answer)
     })
@@ -77,11 +77,11 @@ const QuestionsAndAnswers: FC<PropsType> = (props: PropsType) => {
                     <Space direction="vertical">
                       {selectItemOrders.map((item) => {
                         // 返回本题的每一个选项
-                        return (
+                        return selectItems[item] !== '' ? (
                           <Radio key={item} value={item}>
                             {item.toUpperCase() + ':  ' + selectItems[item]}
                           </Radio>
-                        )
+                        ) : null
                       })}
                     </Space>
                   </Radio.Group>

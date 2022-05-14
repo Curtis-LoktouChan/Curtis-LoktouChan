@@ -13,7 +13,7 @@ interface ITeacherClassList {
 }
 
 // 一个班级成员的信息
-interface IClassMenber {
+interface IClassMember {
   uuid: string
   username: string
   nickName: string
@@ -49,11 +49,20 @@ interface ICourseInfo {
   chapterTitle: string
   chapterDiscription: string
   classID: number
-  Sections: ISection[]
+  sections: ISection[]
 }
 
 // 获取课程信息响应
 export type CoursesInfo = ICourseInfo[]
+//获取课程信息请求
+export interface CoursesInfoReq {
+  classID: string
+}
+
+// 教师删除班级
+export interface ITeacherDeleteClassReq {
+  classID: number
+}
 
 // 教师获取班级列表
 export interface ITeacherClassListResponse {
@@ -65,6 +74,7 @@ export interface ICreateClass {
   name: string
   invitePwd: string | undefined
   classBrief: string
+  selfStudySubject?: string
 }
 
 // 批量添加学生
@@ -74,9 +84,10 @@ export interface IAddStudents {
 }
 
 // 获取班级成员响应
-export interface IGetClassMenbersResponse {
-  classMenbers: IClassMenber[]
-}
+// export interface IGetClassMembersResponse {
+//   classMembers: IClassMember[]
+// }
+export type IGetClassMembersResponse = IClassMember[]
 
 // 撤销学生选课请求
 export interface IDeleteStudent {

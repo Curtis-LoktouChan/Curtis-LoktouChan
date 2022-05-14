@@ -20,7 +20,11 @@ export default defineConfig({
       path: '/userCenter',
       component: '@/pages/userCenter/index',
       routes: [
-        { path: './myClassList', component: './userCenter/components/myClassList/index' }, // 我的班级
+        {
+          path: './myClassList',
+          component: './userCenter/components/myClassList/index',
+          exact: true
+        }, // 我的班级
         { path: './createClass', component: './userCenter/components/createClass/index' }, // 创建班级
         {
           path: './enterClass',
@@ -28,8 +32,8 @@ export default defineConfig({
           routes: [
             // 班级成员
             {
-              path: './classMenbers',
-              component: './userCenter/components/enterClass/components/classMenbers/index'
+              path: './classMembers',
+              component: './userCenter/components/enterClass/components/classMembers/index'
             },
             // 课程目录
             {
@@ -94,21 +98,27 @@ export default defineConfig({
       component: '@/pages/register/components/protocol/index',
       exact: true
     },
-    { path: '/case', component: '@/pages/caseShow/caseIndex', exact: true },
-    { path: '/publishCase', component: '@/pages/caseShow/publishCase', exact: true },
-    { path: '/edictCase', component: '@/pages/caseShow/edictCase', exact: true },
-    { path: '/viewCase', component: '@/pages/caseShow/viewCase', exact: true },
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
-    { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true }
+    { path: '/courseCenter', component: '@/pages/courseCenter/index', exact: true },
+    { path: '/comingSoon', component: '@/pages/developing/index', exact: true }, // 请期待页面
+    { path: '/connectUs', component: '@/pages/connectUs/index', exact: true } // 联系我们页面
   ],
   fastRefresh: {},
   define: {
     'process.env': {
       NODE_ENV: 'development',
-      BASE_URL: 'http://localhost:5222/'
+      BASE_URL: 'http://42.192.82.19:50000/'
+      // BASE_URL: 'http://localhost:5222/'
     }
   },
   dva: {},
-  antd: {}
+  antd: {},
+  proxy: {
+    '/api': {
+      target: 'http://42.192.82.19:50000/', // 服务端域名
+      changeOrigin: true, // 允许域名进行转换
+      pathRewrite: { '^/api': '/api' }
+    }
+  }
   // mfsu: {}
 })

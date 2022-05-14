@@ -1,5 +1,5 @@
 import { history } from 'umi'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Result } from 'antd'
 import { FundTwoTone } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
@@ -38,6 +38,13 @@ const Introduction: FC = () => {
     }
   })
 
+  useEffect(() => {
+    dispatch({
+      type: ACTIONS.adaptiveLearning.setReviewState,
+      payload: { isReview: false }
+    })
+  }, [])
+
   const handleStartLearning = () => {
     run(loginToken as string)
   }
@@ -48,7 +55,7 @@ const Introduction: FC = () => {
         title={
           <div>
             欢迎进入自适应学习系统
-            <h2 style={{ color: 'green' }}> 科目:小学数学 </h2>
+            <h2 style={{ color: 'green' }}> 科目:初识神经网络 </h2>
           </div>
         }
         subTitle="自适应学习系统是通过学生每一阶段的能力测评结果，再制定出适应于用户自身能力状况的学习解决方案，精准定制专属于每一位用户的动态学习计划的一种学习方式"

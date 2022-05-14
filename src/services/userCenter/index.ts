@@ -3,12 +3,14 @@ import {
   ITeacherClassListResponse,
   ICreateClass,
   IAddStudents,
-  IGetClassMenbersResponse,
+  IGetClassMembersResponse,
   IDeleteStudent,
   IUpdateStudentInfo,
   IGetStudentClassListResponse,
   IStudentJoinClass,
-  CoursesInfo
+  CoursesInfo,
+  CoursesInfoReq,
+  ITeacherDeleteClassReq
 } from './types'
 import { PREFIX_URL_V1 } from '@/constants'
 
@@ -19,7 +21,7 @@ export default {
     url: `${PREFIX_URL_V1}teacher/class`
   }),
   // 教师删除班级
-  deleteClass: apiHandle<string, null>({
+  deleteClass: apiHandle<ITeacherDeleteClassReq, null>({
     method: 'DELETE',
     url: `${PREFIX_URL_V1}teacher/class`
   }),
@@ -31,10 +33,10 @@ export default {
   // 教师批量添加学生
   addStudents: apiHandle<IAddStudents, null>({
     method: 'GET',
-    url: `${PREFIX_URL_V1}teacher/addStudentBatch`
+    url: `${PREFIX_URL_V1}teacher/addStudentsBatch`
   }),
   // 教师获取班级成员
-  getClassMenbers: apiHandle<string, IGetClassMenbersResponse>({
+  getClassMembers: apiHandle<CoursesInfoReq, IGetClassMembersResponse>({
     method: 'GET',
     url: `${PREFIX_URL_V1}teacher/studentList`
   }),
@@ -49,14 +51,19 @@ export default {
     url: `${PREFIX_URL_V1}teacher/studentList`
   }),
   // 获取课程信息
-  getCourseInfo: apiHandle<string, CoursesInfo>({
-    method: 'PUT',
-    url: `${PREFIX_URL_V1}teacher/studentList`
+  getCourseInfo: apiHandle<CoursesInfoReq, CoursesInfo>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}teacher/getCourseMenu`
   }),
   // 学生获取班级列表
   getStudentClassList: apiHandle<null, IGetStudentClassListResponse>({
     method: 'GET',
     url: `${PREFIX_URL_V1}student/class`
+  }),
+  // 学生获取课程信息
+  getStudentCourseInfo: apiHandle<CoursesInfoReq, CoursesInfo>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}student/getCourseMenu`
   }),
   // 学生加入班级
   studentJoinClass: apiHandle<IStudentJoinClass, null>({

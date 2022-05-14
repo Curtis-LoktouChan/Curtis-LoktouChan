@@ -18,23 +18,21 @@ const UnitStudy: FC = () => {
     onSuccess: () => {}
   })
 
-  // 时间格式
-  const formatTime = () => {
-    const date = new Date()
-    const Y = date.getFullYear()
-    const M = date.getMonth() + 1
-    const D = date.getDate()
-    const H = date.getHours()
-    const Min = date.getMinutes()
-    return Y + '-' + M + '-' + D + ' ' + H + ':' + Min
-  }
-
   useEffect(() => {
-    dispatch({
-      type: ACTIONS.adaptiveLearning.setStartTime,
-      payload: { startTime: new Date().getTime() }
-    })
-    run({ point_name: adaptiveLearning.knowledgeName, start_time: formatTime() })
+    if (!adaptiveLearning?.isReview) {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setStartTime,
+        payload: { startTime: new Date().getTime() }
+      })
+    } else {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setStartTime,
+        payload: {
+          startTime: new Date().getTime() - adaptiveLearning.submitTime + adaptiveLearning.startTime
+        }
+      })
+    }
+    run({ point_name: adaptiveLearning.knowledgeName })
     const timeInterval = setInterval(() => {
       dispatch({
         type: ACTIONS.adaptiveLearning.presentTime
@@ -137,6 +135,7 @@ const UnitStudy: FC = () => {
           subTitle={adaptiveLearning.knowledgeName}
         />
         <div dangerouslySetInnerHTML={{ __html: data?.knowledge?.section_info?.content! }}></div>
+        <div style={{ height: '400px' }}></div>
       </Layout>
     </Layout>
   )

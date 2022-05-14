@@ -29,23 +29,30 @@ const createClass: FC = () => {
 
   // 提交表单，创建新班级
   const handleSubmit = (values: any) => {
-    const newClass = {
-      name: values.name,
-      classBrief: values.classBrief,
-      invitePwd: values.invitePwd
+    if (values.subject) {
+      run({
+        name: values.name,
+        classBrief: values.classBrief,
+        invitePwd: values.invitePwd,
+        selfStudySubject: values.subject
+      })
+    } else {
+      run({
+        name: values.name,
+        classBrief: values.classBrief,
+        invitePwd: values.invitePwd
+      })
     }
-    run(newClass)
   }
 
   // 创建失败
   const handleCreateFailed = (res: any) => {
-    alert(res)
+    alert('创建失败，请填写必要信息')
   }
 
   return (
     <div>
       <PageHeader
-        className={styles.adaptiveLearingPageHeader}
         backIcon={<LeftCircleTwoTone />}
         onBack={() => history.push('/userCenter/myClassList')}
         title="新建班级"
@@ -133,7 +140,7 @@ const createClass: FC = () => {
           ]}
         >
           <Select>
-            <Select.Option value="小学数学">小学数学</Select.Option>
+            <Select.Option value="初识神经网络">初识神经网络</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 4 }}>

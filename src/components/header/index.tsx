@@ -8,6 +8,8 @@ import { ACTIONS } from '@/models'
 import styles from './index.less'
 import logo from '@/assets/logo.png'
 
+const TEACHER = '2'
+
 const Header: FC = () => {
   const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
@@ -30,13 +32,13 @@ const Header: FC = () => {
   const loggedInMenu = (
     <Menu>
       <Menu.Item key="1">
-        <span style={{ color: 'black' }} onClick={() => history.push('/customerCenter')}>
+        <span style={{ color: 'black' }} onClick={() => history.push('/comingSoon')}>
           我的信息
         </span>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
-        <span style={{ color: 'black' }} onClick={() => history.push('/customerForgotPassword')}>
+        <span style={{ color: 'black' }} onClick={() => history.push('/comingSoon')}>
           修改密码
         </span>
       </Menu.Item>
@@ -65,6 +67,11 @@ const Header: FC = () => {
     })
   }, [])
 
+  const goUserCenter = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('/userCenter/student/classList')
+  }
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerInner}>
@@ -72,19 +79,21 @@ const Header: FC = () => {
           <Image src={logo} width={150} preview={false} onClick={() => history.push('/home')} />
         </div>
         <div className={styles.second}>
-          <Button type="link" onClick={() => history.push('/aboutUs')}>
+          {/* <Button type="link" onClick={() => history.push('/aboutUs')}> */}
+          <Button type="link" onClick={() => history.push('/comingSoon')}>
             关于我们
           </Button>
-          <Button type="link" onClick={() => history.push('./courseCenter')}>
+          <Button type="link" onClick={() => history.push('/courseCenter')}>
             课程中心
           </Button>
-          <Button type="link" onClick={() => history.push('./case')}>
+          {/* <Button type="link" onClick={() => history.push('./case')}> */}
+          <Button type="link" onClick={() => history.push('/comingSoon')}>
             案例展示
           </Button>
           <Button type="link" onClick={() => history.push('/softDownload')}>
             下载软件
           </Button>
-          <Button type="link" onClick={() => history.push('/userCenter')}>
+          <Button type="link" onClick={goUserCenter}>
             个人中心
           </Button>
         </div>
@@ -100,12 +109,14 @@ const Header: FC = () => {
               <span className={styles.username}>
                 {user?.isLogin ? user?.userInfo?.username : '未登录'}
               </span>
-              <Avatar
-                shape="circle"
-                size="small"
-                src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
-                icon={<UserOutlined />}
-              />
+              {
+                <Avatar
+                  shape="circle"
+                  size="small"
+                  src={user?.isLogin ? user?.userInfo?.avatarSrc : ''}
+                  icon={<UserOutlined />}
+                />
+              }
             </div>
           </Dropdown>
         </div>

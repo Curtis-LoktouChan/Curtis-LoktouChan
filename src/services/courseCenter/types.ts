@@ -1,7 +1,7 @@
 export interface IcourseCenterRequest {
   searchText?: string
-  pageNum?: number
-  pageSize?: number
+  pageNum: number
+  pageSize: number
 }
 
 interface IcourseCenterShowData {
@@ -12,7 +12,7 @@ interface IcourseCenterShowData {
   created_at: string
 }
 
-export interface IcourseCenterResponse {
+export interface IourseCenterResponse {
   courseList: IcourseCenterShowData[]
   total: number
 }

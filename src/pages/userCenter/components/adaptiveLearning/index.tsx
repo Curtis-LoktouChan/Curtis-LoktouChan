@@ -1,17 +1,33 @@
 import { history } from 'umi'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Layout, PageHeader } from 'antd'
 import { LeftCircleTwoTone } from '@ant-design/icons'
-import { useSelector } from 'dva'
+import { useSelector, useDispatch } from 'dva'
 
 import styles from './index.less'
+import { ACTIONS } from '@/models'
 
-const AdaptiveLearing: FC = (props) => {
+const TEACHER = '2'
+
+const AdaptiveLearning: FC = (props) => {
   const adaptiveLearning = useSelector((state: any) => state.adaptiveLearning)
   const userCenter = useSelector((state: any) => state.userCenter)
+  const user = useSelector((state: any) => state.user)
+  const dispatch = useDispatch()
 
   const myClassName = `${userCenter.className}`
-  const myClassInfo = `班级ID：${userCenter.classID} 邀请码：${userCenter.invitePwd}`
+  const myClassInfo = `班级ID: ${userCenter.classID} 邀请码: ${
+    userCenter.invitePwd ? userCenter.invitePwd : '无'
+  }`
+
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: ACTIONS.adaptiveLearning.setReviewState,
+        payload: { isReview: false }
+      })
+    }
+  }, [])
 
   const useTime = () => {
     const startTime = adaptiveLearning.startTime
@@ -34,13 +50,18 @@ const AdaptiveLearing: FC = (props) => {
     <></>
   )
 
+  const handleGoBack = () => {
+    if (user.userInfo?.roleId === TEACHER) history.push('/userCenter/myClassList')
+    else history.push('/userCenter/student/classList')
+  }
+
   return (
-    <Layout className={styles.adaptiveLearingOuter}>
+    <Layout className={styles.adaptiveLearningOuter}>
       <PageHeader
-        className={styles.adaptiveLearingPageHeader}
+        className={styles.adaptiveLearningPageHeader}
         tags={tag}
         backIcon={<LeftCircleTwoTone />}
-        onBack={() => history.push('/userCenter/myClassList')}
+        onBack={handleGoBack}
         title={myClassName}
         subTitle={myClassInfo}
       />
@@ -49,4 +70,4 @@ const AdaptiveLearing: FC = (props) => {
   )
 }
 
-export default AdaptiveLearing
+export default AdaptiveLearning
