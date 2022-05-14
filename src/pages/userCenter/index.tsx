@@ -15,7 +15,9 @@ const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
 
   useEffect(() => {
-    if (!user.isLogin && localStorage.getItem('login_token') === '') {
+    if (!localStorage.getItem('login_token')) {
+      history.push('/waitToLogin')
+    } else if (!user.isLogin && localStorage.getItem('login_token') === '') {
       // 未登录时跳转到登录界面
       history.push('/waitToLogin')
     } else {
