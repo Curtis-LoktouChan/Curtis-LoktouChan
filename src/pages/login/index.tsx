@@ -19,7 +19,8 @@ const Login: FC = () => {
         type: ACTIONS.user.login,
         payload: { username: values?.username, password: values?.password },
         callback: (data: IUserLoginResponse) => {
-          localStorage.setItem('login_token', data?.token)
+          localStorage.setItem('login_token', data?.token!)
+          localStorage.setItem('user_roleId', data?.roleId!)
           history.push('./home')
         }
       })

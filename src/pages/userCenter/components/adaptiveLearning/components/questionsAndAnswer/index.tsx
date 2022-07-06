@@ -50,7 +50,7 @@ const QuestionsAndAnswers: FC<PropsType> = (props: PropsType) => {
     <ul className={styles.questionsAndAnswersContainer}>
       <Space direction="vertical" size="large">
         {questionList &&
-          questionList.map((question: IExamList, index: number) => {
+          questionList?.map((question: IExamList, index: number) => {
             const {
               exam_discrition: discrition,
               exam_type: questionType,
@@ -75,7 +75,7 @@ const QuestionsAndAnswers: FC<PropsType> = (props: PropsType) => {
                     }}
                   >
                     <Space direction="vertical">
-                      {selectItemOrders.map((item) => {
+                      {selectItemOrders?.map((item) => {
                         // 返回本题的每一个选项
                         return selectItems[item] !== '' ? (
                           <Radio key={item} value={item}>

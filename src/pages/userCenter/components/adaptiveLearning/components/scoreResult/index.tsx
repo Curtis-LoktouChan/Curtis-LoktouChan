@@ -108,7 +108,7 @@ const scoreResult: FC = () => {
               {`检测完成，你的正确率为${data?.accuracy! * 100}%`}
             </p>
             <div className={styles.knowledgeList}>
-              {adaptiveLearning.knowledgeList.map((knowledge: IKnowledgeList) => {
+              {adaptiveLearning?.knowledgeList?.map((knowledge: IKnowledgeList) => {
                 const { id, name } = knowledge
                 return (
                   <Tag

@@ -99,7 +99,7 @@ const myClassList: FC = () => {
               </h1>
             </Card>
           </Col>
-          {classListData?.classList.map((classInfo, index) => {
+          {classListData?.classList?.map((classInfo, index) => {
             return (
               <Col key={`${classInfo.ID}${index}`} span={6}>
                 <Card

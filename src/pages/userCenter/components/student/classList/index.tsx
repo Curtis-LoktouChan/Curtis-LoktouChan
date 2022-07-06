@@ -91,7 +91,7 @@ const myClassList: FC = () => {
               </h1>
             </Card>
           </Col>
-          {studentClassList?.allClassList.map((classInfo, index) => {
+          {studentClassList?.allClassList?.map((classInfo, index) => {
             return (
               <Col key={`${classInfo.ID}${index}`} span={6}>
                 <Card
