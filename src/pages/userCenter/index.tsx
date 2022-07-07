@@ -15,14 +15,13 @@ const userCenter: FC = (props) => {
   const user = useSelector((state: any) => state.user)
 
   useEffect(() => {
-    if (!localStorage.getItem('login_token')) {
+    // 判断是否已经登录且记录用户角色
+    if (!localStorage.getItem('login_token') || !localStorage.getItem('user_roleId'))
       history.push('/waitToLogin')
-    } else if (!user.isLogin && localStorage.getItem('login_token') === '') {
-      // 未登录时跳转到登录界面
-      history.push('/waitToLogin')
-    } else {
+    else {
       // 已经登录，判断用户身份
-      if (user.userInfo?.roleId === STUDENT)
+      const roleNum = localStorage.getItem('user_roleId')
+      if (roleNum === STUDENT)
         history.push('/userCenter/student/classList') // 学生跳转到学生班级页面
       else history.push('/userCenter/myClassList') // 教师直接跳转到班级页面
     }

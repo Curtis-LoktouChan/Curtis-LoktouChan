@@ -45,7 +45,7 @@ const errorHandler = (error: ResponseError<IErrorData>): any | void => {
   notification.error({
     message: error.data?.code,
     description: error.data?.msg,
-    duration: 3
+    duration: 1
   })
 }
 

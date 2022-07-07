@@ -69,7 +69,7 @@ const enterClass: FC = () => {
               <Collapse.Panel header={course.chapterTitle} key={course.ID}>
                 <strong>章节概况：</strong>
                 {course.chapterDiscription}
-                {course.sections.map((section: any, index: number) => {
+                {course?.sections?.map((section: any, index: number) => {
                   return (
                     <Row
                       align="middle"

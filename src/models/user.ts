@@ -67,7 +67,8 @@ const userModel: IUserModel = {
       }
     },
     *logoutEffect({ payload, callback }, { call, put }) {
-      localStorage.setItem('login_token', '')
+      localStorage.removeItem('login_token')
+      localStorage.removeItem('user_roleId')
       history.push('/home')
       yield put({
         type: 'logout'
