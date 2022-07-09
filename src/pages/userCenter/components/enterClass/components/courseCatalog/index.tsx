@@ -1,16 +1,35 @@
-import { FC, useEffect } from 'react'
-import { Collapse, Row, Col, Button, Popconfirm, message } from 'antd'
-import { EyeTwoTone, DeleteTwoTone, EditTwoTone } from '@ant-design/icons'
+import { history } from 'umi'
+import { FC, useEffect, useState } from 'react'
+import { Collapse, Row, Col, Button, Popconfirm, message, Modal, Form, Input } from 'antd'
+import { EyeTwoTone, DeleteTwoTone, EditTwoTone, FileAddTwoTone } from '@ant-design/icons'
 import { useSelector } from 'dva'
 import { useRequest } from 'ahooks'
 
 import styles from './index.less'
 import { UserCenterServices } from '@/services'
+import { ICourseInfo } from '@/services/userCenter/types'
 
 const ClassMembers: FC = () => {
   const userCenter = useSelector((state: any) => state.userCenter)
+  const [isEditChapterVisible, setIsEditChapterVisibleState] = useState(false) // 是否打开编辑章节对话框
+  const [chapterInformation, setChapterInformation] = useState<any>({}) // 用于保存章节信息传递给对话框
+  const [editChapterForm] = Form.useForm() // 创建编辑章节表单实例
   // 获取班级成员列表数据
   const { data: courses, run: runGetCourses } = useRequest(UserCenterServices.getCourseInfo, {
+    manual: true,
+    onSuccess: () => {
+      return
+    }
+  })
+  // 删除章节请求
+  const { run: runDeleteChapter } = useRequest(UserCenterServices.deleteChapter, {
+    manual: true,
+    onSuccess: () => {
+      return
+    }
+  })
+  // 编辑章节请求
+  const { run: runUpdateChapter } = useRequest(UserCenterServices.updateChapter, {
     manual: true,
     onSuccess: () => {
       return
@@ -27,11 +46,93 @@ const ClassMembers: FC = () => {
     message.info('正在完善中')
   }
 
+  // 确认删除章节
+  const onClickDeleteChapter = (chapterID: number, classID: number) => {
+    runDeleteChapter({
+      chapterID,
+      classID
+    })
+  }
+
+  // 编辑章节完成
+  const handleEditChapterOK = async () => {
+    try {
+      await editChapterForm.validateFields() // 校验表单
+      runUpdateChapter({
+        chapterDiscription: editChapterForm.getFieldValue('chapterDiscription'),
+        chapterTitle: editChapterForm.getFieldValue('chapterTitle'),
+        classID: chapterInformation.classID,
+        chapterID: chapterInformation.ID
+      })
+      editChapterForm.resetFields() // 重置表单
+      setIsEditChapterVisibleState(false)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const panelExtra = (course: ICourseInfo) => {
+    return (
+      <div>
+        <Button
+          size="middle"
+          icon={<FileAddTwoTone />}
+          onClick={() => {
+            history.push('./addSection')
+          }}
+        >
+          添加小节
+        </Button>
+        &nbsp;&nbsp;
+        <Button
+          size="middle"
+          icon={<EditTwoTone />}
+          onClick={() => {
+            setChapterInformation(course)
+            setIsEditChapterVisibleState(true)
+          }}
+        >
+          编辑章节
+        </Button>
+        &nbsp;&nbsp;
+        <Popconfirm
+          title="删除章节下的全部内容？"
+          okText="是"
+          cancelText="否"
+          onConfirm={() => {
+            onClickDeleteChapter(course.ID, course.classID)
+          }}
+        >
+          <Button size="middle" icon={<DeleteTwoTone />}>
+            删除章节
+          </Button>
+        </Popconfirm>
+      </div>
+    )
+  }
+
   return (
     <Collapse style={{ width: '100%', backgroundColor: 'white' }}>
       {courses?.map((course: any) => {
         return (
-          <Collapse.Panel header={course.chapterTitle} key={course.ID}>
+          <Collapse.Panel
+            header={
+              <h3
+                style={{
+                  color: '#1890ff',
+                  fontWeight: '900',
+                  background: '#e3eaef'
+                }}
+              >
+                {course.chapterTitle}
+              </h3>
+            }
+            style={{
+              flexDirection: 'column'
+            }}
+            key={course.ID}
+            extra={panelExtra(course)}
+          >
             <strong>章节概况：</strong>
             {course.chapterDiscription}
             {course?.sections?.map((section: any, index: number) => {
@@ -91,6 +192,41 @@ const ClassMembers: FC = () => {
                 </Row>
               )
             })}
+            <Modal
+              title="编辑章节"
+              visible={isEditChapterVisible}
+              onOk={() => {
+                handleEditChapterOK()
+              }}
+              onCancel={() => {
+                editChapterForm.resetFields()
+                setIsEditChapterVisibleState(false)
+              }}
+            >
+              <Form layout="vertical" form={editChapterForm}>
+                <Form.Item
+                  rules={[{ required: true, message: '请填写正确的章节标题！' }]}
+                  name="chapterTitle"
+                  label="章节标题"
+                >
+                  <Input.TextArea
+                    showCount
+                    maxLength={100}
+                    defaultValue={chapterInformation.chapterTitle}
+                  />
+                </Form.Item>
+                <Form.Item required={false} name="chapterDiscription" label="章节概述">
+                  <Input.TextArea
+                    showCount
+                    maxLength={200}
+                    defaultValue={chapterInformation.chapterDiscription}
+                    style={{
+                      height: '8em'
+                    }}
+                  />
+                </Form.Item>
+              </Form>
+            </Modal>
           </Collapse.Panel>
         )
       })}

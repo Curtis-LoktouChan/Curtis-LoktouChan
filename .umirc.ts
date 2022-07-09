@@ -39,6 +39,11 @@ export default defineConfig({
             {
               path: './courseCatalog',
               component: './userCenter/components/enterClass/components/courseCatalog/index'
+            },
+            // 添加课程小节
+            {
+              path: './addSection',
+              component: './userCenter/components/enterClass/components/addSection/index'
             }
           ]
         }, // 进入班级首页

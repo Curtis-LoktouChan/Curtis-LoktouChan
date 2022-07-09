@@ -10,7 +10,11 @@ import {
   IStudentJoinClass,
   CoursesInfo,
   CoursesInfoReq,
-  ITeacherDeleteClassReq
+  ITeacherDeleteClassReq,
+  IAddChapterRequest,
+  IUpdateChapterRequest,
+  IDeleteChapterRequest,
+  IAddSectionRequest
 } from './types'
 import { PREFIX_URL_V1 } from '@/constants'
 
@@ -69,5 +73,25 @@ export default {
   studentJoinClass: apiHandle<IStudentJoinClass, null>({
     method: 'POST',
     url: `${PREFIX_URL_V1}student/class`
+  }),
+  // 教师添加章节
+  addChapter: apiHandle<IAddChapterRequest, null>({
+    method: 'POST',
+    url: `${PREFIX_URL_V1}teacher/addChapter`
+  }),
+  // 教师编辑章节
+  updateChapter: apiHandle<IUpdateChapterRequest, null>({
+    method: 'PUT',
+    url: `${PREFIX_URL_V1}teacher/updateChapter`
+  }),
+  // 教师删除章节
+  deleteChapter: apiHandle<IDeleteChapterRequest, null>({
+    method: 'POST',
+    url: `${PREFIX_URL_V1}teacher/deleteChapter`
+  }),
+  // 教师添加课程小节
+  addSection: apiHandle<IAddSectionRequest, null>({
+    method: 'POST',
+    url: `${PREFIX_URL_V1}teacher/addSection`
   })
 }

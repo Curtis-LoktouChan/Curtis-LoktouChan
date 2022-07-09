@@ -42,7 +42,7 @@ interface ISection {
 }
 
 // 课程信息
-interface ICourseInfo {
+export interface ICourseInfo {
   ID: number
   CreateAt: string
   UpdateAt: string
@@ -81,6 +81,7 @@ export interface ICreateClass {
 export interface IAddStudents {
   className: string
   newStudentNum: number
+  prefixName: string
 }
 
 // 获取班级成员响应
@@ -111,4 +112,34 @@ export interface IGetStudentClassListResponse {
 export interface IStudentJoinClass {
   classID: number
   invitePwd: string
+}
+
+// 添加章节请求
+export interface IAddChapterRequest {
+  chapterDiscription: string
+  chapterTitle: string
+  classID: number
+}
+
+// 编辑章节请求
+export interface IUpdateChapterRequest {
+  chapterDiscription: string
+  chapterID: number
+  chapterTitle: string
+  classID: number
+}
+
+// 删除章节请求
+export interface IDeleteChapterRequest {
+  chapterID: number
+  classID: number
+}
+
+// 添加课程小节请求
+export interface IAddSectionRequest {
+  classID: number
+  chapterID: number
+  sectionTitle: string
+  sectionContent: string
+  sectionType: string
 }
