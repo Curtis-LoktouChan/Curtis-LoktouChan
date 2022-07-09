@@ -1,16 +1,16 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { ConfigProvider, Layout } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 
 import styles from './index.less'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { useRequest } from 'ahooks'
+import { useRequest, useUpdateEffect } from 'ahooks'
 import { useState } from 'react'
 import { List, Avatar, Row, PageHeader, Button, Input, message, Col, Modal, Form } from 'antd'
 import { useSelector } from 'dva'
 import { history } from 'umi'
-
+import { IcourseCenterShowData } from '@/services/courseCenter/types'
 import courseService from '@/services/courseCenter'
 
 const courseCenter: FC = () => {
@@ -19,17 +19,29 @@ const courseCenter: FC = () => {
   const [joinClassForm] = Form.useForm()
   const [pageNum, setPageNum] = useState(1)
   const [searchText, setSearchText] = useState('')
+  const [courses, setCourse] = useState<IcourseCenterShowData[]>([]) //防止自动识别为never[]导致不能set
+  const [total, setTotal] = useState(0)
   const pageSize = 10
   //请求数据
   const isLogin = useSelector((state: any) => state.user.isLogin)
-  const { data: courseList, run: getList } = useRequest(courseService.getList, {
-    manual: true
+  //换页请求
+  const { data: courseList, run: getList } = useRequest(courseService.getListByPage, {
+    manual: false,
+    defaultParams: [{ pageNum, pageSize, searchText }],
+    onSuccess: (res) => {
+      setCourse(res.courseList)
+      setTotal(res.total)
+    }
   })
-
-  useEffect(() => {
-    getList({ pageNum, pageSize, searchText })
-  }, [pageNum, searchText])
-
+  //搜索请求
+  const { data: searchList, run: search } = useRequest(courseService.getListBySearch, {
+    manual: true,
+    onSuccess: (res) => {
+      setCourse(res.courseList)
+      setTotal(res.total)
+    }
+  })
+  //加入班级请求
   const { data: joinClassMsg, run: joinClass } = useRequest(courseService.joinClass, {
     manual: true,
     onSuccess: (res) => {
@@ -37,7 +49,10 @@ const courseCenter: FC = () => {
       return res
     }
   })
-
+  //更新时才请求，第一次挂载不请求
+  useUpdateEffect(() => {
+    search({ pageNum, pageSize, searchText })
+  }, [searchText])
   //加入班级
   const showModal = (classID: number) => {
     setIsModalVisible(true)
@@ -56,7 +71,16 @@ const courseCenter: FC = () => {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
-
+  //搜索
+  const handleSearch = (text: string) => {
+    setPageNum(1)
+    setSearchText(text)
+  }
+  //换页
+  const handleChangePage = (page: number) => {
+    setPageNum(page)
+    getList({ pageNum: page, pageSize, searchText })
+  }
   return (
     <ConfigProvider locale={zhCN}>
       <Layout>
@@ -73,7 +97,7 @@ const courseCenter: FC = () => {
                   extra={
                     <Col>
                       <Input.Search
-                        onSearch={(text) => setSearchText(text)}
+                        onSearch={(text) => handleSearch(text)}
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="人工智能"
@@ -87,12 +111,13 @@ const courseCenter: FC = () => {
                     size="small"
                     pagination={{
                       onChange: (page) => {
-                        setPageNum(page)
+                        handleChangePage(page)
                       },
                       pageSize: pageSize,
-                      total: courseList?.total
+                      total,
+                      current: pageNum
                     }}
-                    dataSource={courseList?.courseList}
+                    dataSource={courses}
                     renderItem={(item) => (
                       <List.Item
                         key={item.id}

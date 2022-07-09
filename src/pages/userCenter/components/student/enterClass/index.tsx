@@ -56,7 +56,7 @@ const enterClass: FC = () => {
               icon={<BankTwoTone />}
               key="myClass"
               onClick={() => {
-                history.push('/userCenter/enterClass/courseCatalog')
+                history.push('/userCenter/student/enterClass')
               }}
             >
               课程目录
@@ -98,11 +98,35 @@ const enterClass: FC = () => {
                       </Col>
                       <Col span={3}>
                         {section.sectionType === '试题' ? (
-                          <Button onClick={weAreTrying} icon={<EditTwoTone />}>
+                          <Button
+                            onClick={() =>
+                              history.push({
+                                pathname: './viewExam',
+                                state: {
+                                  classID: userCenter?.classID,
+                                  chapterID: section?.chapterID,
+                                  sectionID: section?.ID
+                                }
+                              })
+                            }
+                            icon={<EditTwoTone />}
+                          >
                             做题
                           </Button>
                         ) : (
-                          <Button onClick={weAreTrying} icon={<EditTwoTone />}>
+                          <Button
+                            onClick={() =>
+                              history.push({
+                                pathname: './viewTextSection',
+                                state: {
+                                  classID: userCenter?.classID,
+                                  chapterID: section?.chapterID,
+                                  sectionID: section?.ID
+                                }
+                              })
+                            }
+                            icon={<EditTwoTone />}
+                          >
                             学习
                           </Button>
                         )}

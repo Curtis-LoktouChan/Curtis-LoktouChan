@@ -3,20 +3,18 @@ import { Layout } from 'antd'
 
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import styles from './index.less'
-import Raspberry from './raspberry'
-import Windows from './windows'
 import Banner from '@/components/banner'
-import softDownLoad from '../../assets/banners/softDownload.jpg'
+import styles from './index.less'
+import topImage from '../../assets/banners/customerWork.jpg'
+import WorkDetails from './getMyWork'
 
-const SoftDownloadPage: FC = () => {
+const customWork: FC = () => {
   return (
     <Layout>
       <Layout.Content style={{ backgroundColor: 'white' }}>
         <Header />
-        <Banner imgSrc={softDownLoad}></Banner>
-        <Raspberry />
-        <Windows />
+        <Banner imgSrc={topImage}></Banner>
+        <WorkDetails></WorkDetails>
       </Layout.Content>
       <Layout.Footer
         style={{
@@ -31,4 +29,4 @@ const SoftDownloadPage: FC = () => {
   )
 }
 
-export default SoftDownloadPage
+export default customWork

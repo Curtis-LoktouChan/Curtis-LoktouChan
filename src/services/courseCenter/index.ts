@@ -4,16 +4,22 @@ import {
   IcourseCenterRequest,
   IcourseCenterResponse,
   joinClassRequest,
-  joinClassResponse
+  joinClassResponse,
+  IcourseCenterBySearchReq,
+  IcourseCenterBySearchRes
 } from './types'
 
 export default {
-  getList: apiHandle<IcourseCenterRequest, IcourseCenterResponse>({
+  getListByPage: apiHandle<IcourseCenterRequest, IcourseCenterResponse>({
     method: 'GET',
-    url: `${PREFIX_URL_V1}courseCenter/getCourseList`
+    url: `${PREFIX_URL_V1}courseCenter/getCourseListByPageNum`
   }),
   joinClass: apiHandle<joinClassRequest, joinClassResponse>({
     method: 'POST',
     url: `${PREFIX_URL_V1}student/class`
+  }),
+  getListBySearch: apiHandle<IcourseCenterBySearchReq, IcourseCenterBySearchRes>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}courseCenter/getCourseListBySearch`
   })
 }

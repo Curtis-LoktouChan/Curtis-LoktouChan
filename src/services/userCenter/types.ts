@@ -35,6 +35,7 @@ interface IStudentClassInfo {
 
 // 小节信息
 interface ISection {
+  ID: number
   sectionType: string
   sectionTitle: string
   classID: number
@@ -50,6 +51,13 @@ export interface ICourseInfo {
   chapterDiscription: string
   classID: number
   sections: ISection[]
+}
+//我的作品
+interface IMYWork {
+  id: number
+  CreatedAt: string
+  UpdatedAt: string
+  projectName: string
 }
 
 // 获取课程信息响应
@@ -113,7 +121,38 @@ export interface IStudentJoinClass {
   classID: number
   invitePwd: string
 }
-
+//学习内容
+interface IStudentRes {
+  ID: number
+  CreatedAt: string
+  UpdateAt: string
+  sectionType: string
+  sectionTitle: string
+  sectionContent: string
+  classID: number
+  chapterID: number
+}
+export interface IStudentSectionRes {
+  data: IStudentRes
+}
+export interface IStudentSectionReq {
+  classID: number
+  chapterID: number
+  sectionID: number
+}
+//学生做题
+export interface IStudentQuestionReq {
+  classID: number
+  chapterID: number
+  sectionID: number
+}
+interface IStudentQuestin {
+  sectionTitle: string
+  exams: object
+}
+export interface IStudentQuestionRes {
+  data: IStudentQuestin
+}
 // 添加章节请求
 export interface IAddChapterRequest {
   chapterDiscription: string

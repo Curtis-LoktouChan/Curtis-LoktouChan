@@ -11,6 +11,10 @@ import {
   CoursesInfo,
   CoursesInfoReq,
   ITeacherDeleteClassReq,
+  IStudentSectionRes,
+  IStudentSectionReq,
+  IStudentQuestionReq,
+  IStudentQuestionRes,
   IAddChapterRequest,
   IUpdateChapterRequest,
   IDeleteChapterRequest,
@@ -73,6 +77,16 @@ export default {
   studentJoinClass: apiHandle<IStudentJoinClass, null>({
     method: 'POST',
     url: `${PREFIX_URL_V1}student/class`
+  }),
+  //获取学习小节
+  studentSection: apiHandle<IStudentSectionReq, IStudentSectionRes>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}student/getSection`
+  }),
+  //获取学生试题
+  studentQuestion: apiHandle<IStudentQuestionReq, IStudentQuestionRes>({
+    method: 'GET',
+    url: `${PREFIX_URL_V1}student/getExam`
   }),
   // 教师添加章节
   addChapter: apiHandle<IAddChapterRequest, null>({

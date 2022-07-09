@@ -16,6 +16,7 @@ export default defineConfig({
     { path: '/softDownload', component: '@/pages/softDownload/index', exact: true },
     { path: '/login', component: '@/pages/login/index', exact: true },
     { path: '/waitToLogin', component: '@/pages/waitToLogin/index', exact: true },
+    { path: '/customWork', component: '@/pages/customWork/index', exact: true },
     {
       path: '/userCenter',
       component: '@/pages/userCenter/index',
@@ -89,6 +90,17 @@ export default defineConfig({
               component: './userCenter/components/adaptiveLearning/components/finishAll/index.tsx'
             } // 全部完成
           ]
+        },
+        //非自适应学习
+        //学生学习
+        {
+          path: './student/viewTextSection',
+          component: './userCenter/components/student/viewTextSection/index.tsx'
+        },
+        //学生做题
+        {
+          path: './student/viewExam',
+          component: './userCenter/components/student/viewExam/index.tsx'
         }
       ]
     },
@@ -117,13 +129,13 @@ export default defineConfig({
     }
   },
   dva: {},
-  antd: {},
-  proxy: {
-    '/api': {
-      target: 'http://42.192.82.19:50000/', // 服务端域名
-      changeOrigin: true, // 允许域名进行转换
-      pathRewrite: { '^/api': '/api' }
-    }
-  }
+  antd: {}
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://42.192.82.19:50000/', // 服务端域名
+  //     changeOrigin: true, // 允许域名进行转换
+  //     pathRewrite: { '^/api': '/api' }
+  //   }
+  // }
   // mfsu: {}
 })

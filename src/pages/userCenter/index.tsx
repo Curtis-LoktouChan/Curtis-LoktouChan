@@ -58,7 +58,7 @@ const userCenter: FC = (props) => {
                 key="myWork"
                 onClick={() => {
                   // history.push('/customerWork')
-                  history.push('/comingSoon')
+                  history.push('/customWork')
                 }}
               >
                 我的作品
