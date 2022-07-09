@@ -31,18 +31,44 @@ const enterClass: FC = (props) => {
   const [chapterForm] = Form.useForm(),
     [addStudentForm] = Form.useForm()
   const inputNumberRef = useRef<any>(null)
+  const [addChapterFlag, setAddChapterFlag] = useState(0)
+  const [addStudentsFlag, setAddStudentsFlag] = useState(0)
   const userCenter = useSelector((state: any) => state.userCenter) // 获取班级信息
   // 批量添加学生
   const { run: runAddStudents } = useRequest(UserCenterServices.addStudents, {
-    manual: true
+    manual: true,
+    onSuccess: () => {
+      setAddStudentsFlag(addStudentsFlag + 1)
+    }
   })
   // 添加章节
   const { run: runAddChapter } = useRequest(UserCenterServices.addChapter, {
-    manual: true
+    manual: true,
+    onSuccess: () => {
+      setAddChapterFlag(addChapterFlag + 1)
+    }
   })
 
   useEffect(() => {
-    history.push('./enterClass/courseCatalog')
+    history.push({
+      pathname: '/userCenter/enterClass/classMembers',
+      query: {
+        addCounts: addStudentsFlag.toString()
+      }
+    })
+  }, [addStudentsFlag])
+
+  useEffect(() => {
+    history.push({
+      pathname: '/userCenter/enterClass/courseCatalog',
+      query: {
+        addCounts: addChapterFlag.toString()
+      }
+    })
+  }, [addChapterFlag])
+
+  useEffect(() => {
+    history.push('/userCenter/enterClass/courseCatalog')
   }, [])
 
   // 确认添加学生
@@ -51,7 +77,7 @@ const enterClass: FC = (props) => {
       // 校验表单
       await addStudentForm.validateFields()
       runAddStudents({
-        className: userCenter.className,
+        classID: userCenter.classID,
         newStudentNum: addStudentForm.getFieldValue('studentNumber'),
         prefixName: addStudentForm.getFieldValue('prefixName')
       })
@@ -230,7 +256,7 @@ const enterClass: FC = (props) => {
           >
             <Input.TextArea size="small" showCount maxLength={100} />
           </Form.Item>
-          <Form.Item label="章节描述" name="chapterDiscrption">
+          <Form.Item label="章节描述" name="chapterDiscription">
             <Input.TextArea size="large" showCount maxLength={200} />
           </Form.Item>
         </Form>
