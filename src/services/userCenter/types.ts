@@ -79,7 +79,7 @@ export interface ICreateClass {
 
 // 批量添加学生
 export interface IAddStudents {
-  className: string
+  classID: number
   newStudentNum: number
   prefixName: string
 }
@@ -93,7 +93,7 @@ export type IGetClassMembersResponse = IClassMember[]
 // 撤销学生选课请求
 export interface IDeleteStudent {
   className: string
-  StudentUserName: string
+  studentUserName: string
 }
 
 // 更新学生信息

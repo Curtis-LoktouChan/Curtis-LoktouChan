@@ -1,3 +1,4 @@
+import { useLocation } from 'umi'
 import { FC, useState, useEffect } from 'react'
 import { Table, Tag, Button, Avatar, Popconfirm, Input, message } from 'antd'
 import { useSelector } from 'dva'
@@ -11,6 +12,7 @@ const STUDENT = '1'
 const TEACHER = '2'
 
 const ClassMembers: FC = () => {
+  const location = useLocation()
   const [isSettingPhone, setIsSettingPhone] = useState(false)
   const [isSettingName, setIsSettingName] = useState(false)
   const userCenter = useSelector((state: any) => state.userCenter)
@@ -53,14 +55,31 @@ const ClassMembers: FC = () => {
   // 组件挂载即请求获取学生数据
   useEffect(() => {
     runGetClassMembers({ classID: userCenter?.classID?.toString() })
-  }, [updateNum])
+  }, [updateNum, (location as any)?.query.addCounts])
 
   // 撤销选课
   const handleCancelChoosing = (username: string) => {
-    runDeleteStudent({
-      className: userCenter.className,
-      StudentUserName: username
-    })
+    // console.log(username)
+    // runDeleteStudent({
+    //   className: userCenter.className,
+    //   StudentUserName: username
+    // })
+    // 找到其他方法要换掉
+    fetch(
+      `http://42.192.82.19:50000/api/v1/teacher/studentList?className=${userCenter.className}&studentUsername=${username}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: localStorage.getItem('login_token')!
+        }
+      }
+    )
+      .then((res) => {
+        setUpdateNum(updateNum + 1)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   // 修改学生信息
@@ -163,7 +182,7 @@ const ClassMembers: FC = () => {
             <Popconfirm
               title="确认撤销该学生选课？"
               onConfirm={() => {
-                handleCancelChoosing(record.username)
+                handleCancelChoosing(record.name)
               }}
             >
               <Button type="primary" shape="round">

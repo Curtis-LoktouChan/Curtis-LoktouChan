@@ -1,4 +1,4 @@
-import { history } from 'umi'
+import { history, useLocation } from 'umi'
 import { FC, useEffect, useState } from 'react'
 import { Collapse, Row, Col, Button, Popconfirm, message, Modal, Form, Input } from 'antd'
 import { EyeTwoTone, DeleteTwoTone, EditTwoTone, FileAddTwoTone } from '@ant-design/icons'
@@ -10,7 +10,9 @@ import { UserCenterServices } from '@/services'
 import { ICourseInfo } from '@/services/userCenter/types'
 
 const ClassMembers: FC = () => {
+  const location = useLocation()
   const userCenter = useSelector((state: any) => state.userCenter)
+  const [chapterFlag, setChapterFlag] = useState(0)
   const [isEditChapterVisible, setIsEditChapterVisibleState] = useState(false) // 是否打开编辑章节对话框
   const [chapterInformation, setChapterInformation] = useState<any>({}) // 用于保存章节信息传递给对话框
   const [editChapterForm] = Form.useForm() // 创建编辑章节表单实例
@@ -25,21 +27,22 @@ const ClassMembers: FC = () => {
   const { run: runDeleteChapter } = useRequest(UserCenterServices.deleteChapter, {
     manual: true,
     onSuccess: () => {
-      return
+      setChapterFlag(chapterFlag + 1)
     }
   })
   // 编辑章节请求
   const { run: runUpdateChapter } = useRequest(UserCenterServices.updateChapter, {
     manual: true,
     onSuccess: () => {
-      return
+      setChapterFlag(chapterFlag + 1)
     }
   })
 
   // 组件挂载即请求课程数据
   useEffect(() => {
+    console.log('刷新页面')
     runGetCourses({ classID: userCenter?.classID?.toString() })
-  }, [])
+  }, [chapterFlag, (location as any)?.query?.addCounts])
 
   // 提示信息
   const weAreTrying = () => {
@@ -78,7 +81,8 @@ const ClassMembers: FC = () => {
           size="middle"
           icon={<FileAddTwoTone />}
           onClick={() => {
-            history.push('./addSection')
+            // history.push('./addSection')
+            message.info('正在完善')
           }}
         >
           添加小节
@@ -88,7 +92,7 @@ const ClassMembers: FC = () => {
           size="middle"
           icon={<EditTwoTone />}
           onClick={() => {
-            setChapterInformation(course)
+            setChapterInformation({ ...course })
             setIsEditChapterVisibleState(true)
           }}
         >
@@ -208,6 +212,7 @@ const ClassMembers: FC = () => {
                   rules={[{ required: true, message: '请填写正确的章节标题！' }]}
                   name="chapterTitle"
                   label="章节标题"
+                  initialValue={chapterInformation.chapterTitle}
                 >
                   <Input.TextArea
                     showCount
@@ -215,7 +220,12 @@ const ClassMembers: FC = () => {
                     defaultValue={chapterInformation.chapterTitle}
                   />
                 </Form.Item>
-                <Form.Item required={false} name="chapterDiscription" label="章节概述">
+                <Form.Item
+                  required={false}
+                  name="chapterDiscription"
+                  label="章节概述"
+                  initialValue={chapterInformation.chapterDiscription}
+                >
                   <Input.TextArea
                     showCount
                     maxLength={200}
