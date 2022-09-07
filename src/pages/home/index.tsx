@@ -12,13 +12,15 @@ import Hardware from './components/hardware'
 import Course from './components/course'
 import Work from './components/work'
 import SoftDownload from './components/softDownload'
+import HomeAffix from './components/affix'
 
 const Home: FC = () => {
+  //新增HomeAffix
   return (
     <ConfigProvider locale={zhCN}>
       <Layout>
         <Layout.Content className={styles.homeContainer}>
-          {/* <HomeAffix /> */}
+          <HomeAffix />
           <Header />
           <MyCarousel />
           <Introduction />
